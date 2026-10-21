@@ -12,104 +12,139 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&family=Gowun+Batang:wght@400;700&family=Zilla+Slab:wght@600;700&display=swap" rel="stylesheet">
 <style>
-:root{--night:#1c1a2c;--night2:#26233a;--night3:#322e4a;--cream:#efe6cc;--cream2:#e4d7b4;--ink:#2b2418;--green:#2f4a35;--green2:#22362a;--orange:#e8742a;--lilac:#b9a3d6;--muted:#9d93b8;--line:#ffffff1f;
+:root{--cream:#efe6cc;--cream2:#e4d7b4;--ink:#2b2418;--green:#2f4a35;--orange:#e8742a;--lilac:#b9a3d6;
   --type:'Special Elite','Courier New',monospace;--sans:'IBM Plex Sans KR',sans-serif;--mono:'IBM Plex Mono','IBM Plex Sans KR',monospace;--batang:'Gowun Batang',serif;--slab:'Zilla Slab',Georgia,serif}
+/* ── mode themes ── */
+body.m-everyday{--bg:#e8dcc0;--bg2:#f4ecd8;--bg3:#efe4c8;--text:#2b2418;--text2:#4f4433;--muted:#86765a;--line:#2b241826;--accent:#b8501c;--title:#2f4a35;--chat:#f8f2e2;--chatline:#2b241826;--bar:#e8dcc0e6;--chip:#2b241833;
+  --paper:#efe6cc;--paper2:#e4d7b4;--pink:#2b2418;--paperline:rgba(47,74,53,.13);--dot:#2b24180d}
+body.m-halloween{--bg:#1c1a2c;--bg2:#26233a;--bg3:#211f33;--text:#e9e4f2;--text2:#c9c1dc;--muted:#9d93b8;--line:#ffffff1f;--accent:#e8742a;--title:#efe6cc;--chat:#141320;--chatline:#ffffff1f;--bar:#1c1a2ce6;--chip:#ffffff2e;
+  --paper:#2b1f3a;--paper2:#3a2a4f;--pink:#f3e6d0;--paperline:rgba(232,116,42,.12);--dot:#ffffff08}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--night);color:#e9e4f2;font-family:var(--sans);line-height:1.75;font-size:15px;
-  background-image:radial-gradient(#ffffff08 1px,transparent 1.2px);background-size:18px 18px}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.75;font-size:15px;transition:background .7s,color .7s;
+  background-image:radial-gradient(var(--dot) 1px,transparent 1.2px);background-size:18px 18px}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
 
+/* falling leaves / bats */
+.fx{position:fixed;inset:0;pointer-events:none;z-index:40;overflow:hidden}
+.fx i{position:absolute;top:-40px;display:block;opacity:0;transition:opacity .8s}
+body.m-everyday .fx .lf{opacity:.85}
+body.m-halloween .fx .bt{opacity:.9}
+.lf{width:18px;height:18px;border-radius:0 70% 0 70%;animation:fall linear infinite}
+@keyframes fall{0%{transform:translate(0,-40px) rotate(0)}100%{transform:translate(var(--dx),110vh) rotate(540deg)}}
+.bt{width:34px;height:14px;animation:fly linear infinite}
+.bt::before,.bt::after{content:"";position:absolute;top:0;width:17px;height:12px;background:#0d0a14;clip-path:polygon(100% 30%,70% 0,55% 35%,35% 10%,25% 45%,0 30%,20% 100%,100% 70%);animation:flap .35s ease-in-out infinite alternate;transform-origin:right center}
+.bt::before{left:0}.bt::after{right:0;transform:scaleX(-1);transform-origin:left center;animation-name:flap2}
+@keyframes flap{to{transform:scaleY(.4)}}@keyframes flap2{to{transform:scaleX(-1) scaleY(.4)}}
+@keyframes fly{0%{transform:translate(-10vw,var(--y))}50%{transform:translate(50vw,calc(var(--y) - 60px))}100%{transform:translate(110vw,var(--y))}}
+body.m-halloween .vign{opacity:1}
+.vign{position:fixed;inset:0;pointer-events:none;z-index:39;opacity:0;transition:opacity .8s;background:radial-gradient(ellipse at 50% 120%,#e8742a22,transparent 55%),radial-gradient(ellipse at 50% 50%,transparent 55%,#00000066)}
+
 /* top bar */
-.bar{position:sticky;top:0;z-index:50;background:#1c1a2ce6;backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.bar{position:sticky;top:0;z-index:50;background:var(--bar);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);transition:background .7s}
 .bar .wrap{display:flex;align-items:center;gap:16px;height:48px}
-.bar .lg{font:400 13px var(--type);letter-spacing:.16em;color:var(--cream);margin-right:auto;display:flex;align-items:center;gap:8px}
+.bar .lg{font:400 13px var(--type);letter-spacing:.16em;color:var(--title);margin-right:auto;display:flex;align-items:center;gap:8px}
 .bar .lg img{width:24px;height:24px}
 .bar nav{display:flex;gap:16px;font:500 12px var(--mono);letter-spacing:.08em;color:var(--muted)}
-.bar nav a:hover{color:var(--orange)}
-.bar .bk{font:500 12px var(--mono);letter-spacing:.08em;border:1px solid #ffffff33;padding:3px 10px;border-radius:3px}
-.bar .bk:hover{border-color:var(--orange);color:var(--orange)}
-.lgsw{display:flex;border:1px solid #ffffff33;border-radius:3px;overflow:hidden}
+.bar nav a:hover{color:var(--accent)}
+.bar .bk{font:500 12px var(--mono);letter-spacing:.08em;border:1px solid var(--chip);padding:3px 10px;border-radius:3px}
+.bar .bk:hover{border-color:var(--accent);color:var(--accent)}
+.lgsw{display:flex;border:1px solid var(--chip);border-radius:3px;overflow:hidden}
 .lgsw button{font:500 11px var(--mono);padding:3px 9px;color:var(--muted)}
-.lgsw button.on{background:var(--cream);color:var(--ink)}
+.lgsw button.on{background:var(--title);color:var(--bg)}
 @media(max-width:760px){.bar nav{display:none}}
 
 /* hero */
-.hero{position:relative;min-height:min(760px,100svh);display:flex;align-items:center;overflow:hidden;border-bottom:1px solid var(--line)}
-.hero .bgm{position:absolute;inset:-4%;background:center/cover;filter:saturate(.9);transition:opacity .8s}
+.hero{position:relative;min-height:min(780px,100svh);display:flex;align-items:center;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero .bgm{position:absolute;inset:-4%;background:center/cover;transition:opacity 1s}
 .hero .bgm.hw{opacity:0}
 body.m-halloween .hero .bgm.hw{opacity:1}
-.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,#1c1a2c55,#1c1a2cee 70%),linear-gradient(0deg,var(--night),transparent 30%)}
+.hero .ov{position:absolute;inset:0;z-index:1;transition:opacity 1s}
+.hero .ov.ed{background:radial-gradient(ellipse at 50% 42%,#f4ecd8aa,#e8dcc0f2 72%),linear-gradient(0deg,#e8dcc0,transparent 30%)}
+.hero .ov.hw{opacity:0;background:radial-gradient(ellipse at 50% 42%,#1c1a2c55,#1c1a2cee 70%),linear-gradient(0deg,#1c1a2c,transparent 30%)}
+body.m-halloween .hero .ov.ed{opacity:0}body.m-halloween .hero .ov.hw{opacity:1}
 .hero .in{position:relative;z-index:2;text-align:center;width:100%;padding:70px 20px 60px}
-.badge{width:min(250px,56vw);margin:0 auto;position:relative;filter:drop-shadow(0 14px 30px #000a)}
-.badge img{width:100%;animation:flick 7s infinite}
-@keyframes flick{0%,92%,100%{filter:none}93%{filter:brightness(.55)}94%{filter:none}96%{filter:brightness(.7)}}
+.badge{width:min(250px,56vw);margin:0 auto;position:relative;filter:drop-shadow(0 14px 30px #0006)}
+.badge img{width:100%;position:relative;z-index:1}
+.badge::before{content:"";position:absolute;inset:-18%;border-radius:50%;background:radial-gradient(circle,#e8742a66,transparent 65%);opacity:0;transition:opacity 1s}
+body.m-halloween .badge::before{opacity:1;animation:pulse 3s ease-in-out infinite}
+body.m-halloween .badge img{animation:flick 6s infinite}
+@keyframes pulse{50%{transform:scale(1.08);opacity:.6}}
+@keyframes flick{0%,90%,100%{filter:none}91%{filter:brightness(.45)}92%{filter:none}95%{filter:brightness(.65)}}
 .hero h1{font:700 clamp(46px,8vw,92px)/.98 var(--slab);letter-spacing:.06em;margin-top:26px}
-.hero h1 span{display:block;color:var(--cream)}
+.hero h1 span{display:block;color:var(--title);transition:color .7s}
 .hero h1 b{display:block;color:var(--orange)}
-.hero .sub{font:500 clamp(12px,1.6vw,16px) var(--mono);letter-spacing:.42em;color:#d8d0ef;margin-top:16px}
-.hero .ko{font:700 20px var(--batang);color:var(--cream);margin-top:18px}
-.hero .lead{font:400 15.5px/1.8 var(--batang);color:#cfc7e2;max-width:520px;margin:10px auto 0}
-.modes{display:inline-flex;margin-top:26px;border:1.5px solid var(--cream);border-radius:3px;overflow:hidden}
-.modes button{padding:8px 18px;font:500 12px var(--mono);letter-spacing:.12em;color:var(--cream);text-align:left;line-height:1.3}
+body.m-halloween .hero h1 b{text-shadow:0 0 22px #e8742a88}
+.hero .sub{font:500 clamp(12px,1.6vw,16px) var(--mono);letter-spacing:.42em;color:var(--text2);margin-top:16px}
+.hero .ko{font:700 20px var(--batang);color:var(--title);margin-top:18px}
+.hero .lead{font:400 15.5px/1.8 var(--batang);color:var(--text2);max-width:520px;margin:10px auto 0}
+.hero .date{font:400 14px var(--type);letter-spacing:.12em;color:var(--accent);margin-top:22px}
+.modes{display:inline-flex;margin-top:12px;border:1.5px solid var(--title);border-radius:3px;overflow:hidden}
+.modes button{padding:9px 20px;font:500 12px var(--mono);letter-spacing:.12em;color:var(--title);text-align:left;line-height:1.3}
 .modes button small{display:block;font:400 10.5px var(--mono);opacity:.7;letter-spacing:.06em}
-.modes button.on{background:var(--cream);color:var(--ink)}
+.modes button.on{background:var(--title);color:var(--bg)}
 body.m-halloween .modes{border-color:var(--orange)}
 body.m-halloween .modes button{color:var(--orange)}
 body.m-halloween .modes button.on{background:var(--orange);color:#1d1226}
 .tags{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:18px}
-.tags span{font:500 11.5px var(--mono);padding:2px 9px;border:1px solid #ffffff2e;border-radius:20px;color:#cfc7e2}
+.tags span{font:500 11.5px var(--mono);padding:2px 9px;border:1px solid var(--chip);border-radius:20px;color:var(--text2)}
+.ed-only{display:inline}.hw-only{display:none}
+body.m-halloween .ed-only{display:none}body.m-halloween .hw-only{display:inline}
 
 /* sections */
 .sec{padding:84px 0;border-bottom:1px solid var(--line)}
 .sh{margin-bottom:30px}
-.sh .k{font:400 12.5px var(--type);letter-spacing:.24em;color:var(--orange)}
-.sh h2{font:700 clamp(26px,3.6vw,36px)/1.25 var(--batang);color:var(--cream);margin-top:6px}
-.sh p{font:400 14.5px/1.8 var(--sans);color:#b9b0d0;margin-top:8px;max-width:640px}
+.sh .k{font:400 12.5px var(--type);letter-spacing:.24em;color:var(--accent)}
+.sh h2{font:700 clamp(26px,3.6vw,36px)/1.25 var(--batang);color:var(--title);margin-top:6px}
+.sh p{font:400 14.5px/1.8 var(--sans);color:var(--text2);margin-top:8px;max-width:640px}
 @media(max-width:700px){.sec{padding:60px 0}}
 
 /* case file */
-.paper{position:relative;background:var(--cream);color:var(--ink);padding:30px 30px 26px;background-image:repeating-linear-gradient(0deg,transparent 0 27px,rgba(47,74,53,.13) 27px 28px);box-shadow:0 10px 30px #0008;transform:rotate(-.3deg)}
+.paper{position:relative;background:var(--paper);color:var(--pink);padding:30px 30px 26px;background-image:repeating-linear-gradient(0deg,transparent 0 27px,var(--paperline) 27px 28px);box-shadow:0 10px 30px #0005;transform:rotate(-.3deg);transition:background-color .7s,color .7s}
 .paper .tape{position:absolute;top:-11px;width:96px;height:24px;background:rgba(232,220,170,.78);border:1px dashed rgba(0,0,0,.12)}
+body.m-halloween .paper .tape{background:rgba(232,116,42,.55)}
 .paper .tape.l{left:24px;transform:rotate(-5deg)}.paper .tape.r{right:24px;transform:rotate(4deg)}
-.paper h3{font:400 13px var(--type);letter-spacing:.18em;color:#a8483a}
+.paper h3{font:400 13px var(--type);letter-spacing:.18em;color:var(--accent)}
 .paper p{font:400 16px/1.9 var(--batang);margin-top:10px}
 .paper p em{font-style:normal;background:#2f4a3522;padding:0 4px}
+body.m-halloween .paper p em{background:#e8742a33}
 .mcards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
-.mc{border:1.5px solid var(--ink);padding:12px 14px;background:var(--cream2);box-shadow:2px 2px 0 #0003}
+.mc{border:1.5px solid currentColor;padding:12px 14px;box-shadow:2px 2px 0 #0003;cursor:pointer;transition:transform .2s,opacity .3s;opacity:.55}
+.mc:hover{transform:translateY(-2px)}
+.mc.on{opacity:1}
 .mc b{display:block;font:700 16px var(--sans)}
-.mc small{display:block;font:500 12px var(--mono);color:#7a6a4e;letter-spacing:.06em}
+.mc small{display:block;font:500 12px var(--mono);opacity:.75;letter-spacing:.06em}
 .mc p{font:400 13.5px/1.7 var(--sans);margin-top:6px}
-.mc.hw{background:#2b1f3a;color:#f3e6d0;border-color:#2b1f3a}.mc.hw small{color:var(--lilac)}
+.mc.ed{background:#e4d7b4;color:#2b2418}.mc.hw{background:#140f1d;color:#f3e6d0;border-color:#e8742a}
 @media(max-width:640px){.mcards{grid-template-columns:1fr}.paper{padding:26px 18px 20px}}
 
 /* roster */
 .roster{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-.pt{background:var(--night2);border:1px solid var(--line);border-radius:6px;padding:16px 14px 14px;position:relative;overflow:hidden}
+.pt{background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:16px 14px 14px;position:relative;overflow:hidden;transition:background .7s}
 .pt::before{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:var(--green);opacity:.55}
-.pt::after{content:"";position:absolute;right:-6px;top:4px;width:70px;height:26px;background:linear-gradient(100deg,rgba(255,240,170,.35),transparent);clip-path:polygon(0 40%,100% 0,100% 100%);transform:rotate(18deg)}
-.pt .cs{font:400 20px var(--type);letter-spacing:.06em;color:var(--orange);position:relative}
+body.m-halloween .pt::before{background:#e8742a;opacity:.25}
+.pt .cs{font:400 20px var(--type);letter-spacing:.06em;color:var(--accent);position:relative}
 .pt .id{font:500 10.5px var(--mono);color:var(--muted);letter-spacing:.1em}
-.pt h4{font:700 16px var(--sans);color:var(--cream);margin-top:10px}
-.pt h4 small{display:block;font:500 11.5px var(--mono);color:var(--muted);font-weight:500}
-.pt p{font:400 13px/1.6 var(--sans);color:#c9c1dc;margin-top:6px}
+.pt h4{font:700 16px var(--sans);color:var(--title);margin-top:10px}
+.pt h4 small{display:block;font:500 11.5px var(--mono);color:var(--muted)}
+.pt p{font:400 13px/1.6 var(--sans);color:var(--text2);margin-top:6px}
 @media(max-width:900px){.roster{grid-template-columns:repeat(2,1fr)}.roster .pt:last-child{grid-column:1/-1}}
 
 /* try-it */
 .try{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:22px;align-items:start}
-.chat{background:#141320;border:1px solid var(--line);border-radius:8px;padding:18px 16px;min-height:420px}
+.chat{background:var(--chat);border:1px solid var(--chatline);border-radius:8px;padding:18px 16px;min-height:420px;transition:background .7s}
 .chat .who{display:flex;align-items:center;gap:8px;font:500 12px var(--mono);color:var(--muted);margin-bottom:6px}
 .chat .who img{width:28px;height:28px;border-radius:50%}
-.msg{font:400 15px/1.85 var(--sans);color:#e7e2f0}
+.msg{font:400 15px/1.85 var(--sans);color:var(--text)}
 .msg p{margin:0 0 12px}
-.msg .u{display:inline-block;font:500 12px/1.4 var(--mono);background:#ffffff1a;border-radius:3px;padding:0 5px;color:var(--cream)}
-.msg .note{display:block;margin:4px 0;padding:6px 10px;border-left:3px solid var(--orange);background:#ffffff0a;font-family:var(--batang)}
+.msg .u{display:inline-block;font:500 12px/1.4 var(--mono);background:var(--chip);border-radius:3px;padding:0 5px}
+.msg .note{display:block;margin:4px 0;padding:6px 10px;border-left:3px solid var(--orange);background:#8881;font-family:var(--batang)}
 .done{margin-top:10px;text-align:center;font:500 12px var(--mono);color:var(--muted)}
-.done button{margin-left:8px;border:1px solid #ffffff33;border-radius:3px;padding:2px 10px;color:var(--cream)}
-.tg{position:sticky;top:64px;background:var(--cream);color:var(--ink);border-radius:4px;padding:16px 16px 14px;box-shadow:0 8px 24px #0007;background-image:repeating-linear-gradient(0deg,transparent 0 27px,rgba(47,74,53,.13) 27px 28px)}
+.done button{margin-left:8px;border:1px solid var(--chip);border-radius:3px;padding:2px 10px;color:var(--text)}
+.tg{position:sticky;top:64px;background:var(--cream);color:var(--ink);border-radius:4px;padding:16px 16px 14px;box-shadow:0 8px 24px #0005;background-image:repeating-linear-gradient(0deg,transparent 0 27px,rgba(47,74,53,.13) 27px 28px)}
 .tg h4{font:400 13px var(--type);letter-spacing:.16em;color:#a8483a;margin-bottom:8px}
 .tg .k{font:500 12px var(--mono);color:#7a6a4e;margin:10px 0 4px}
 .tg .seg{display:flex;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden}
@@ -120,8 +155,39 @@ body.m-halloween .modes button.on{background:var(--orange);color:#1d1226}
 .tg p{font:400 12px/1.6 var(--sans);color:#6d5f47;margin-top:12px}
 @media(max-width:900px){.try{grid-template-columns:minmax(0,1fr)}.tg{position:static;order:-1}}
 
-/* big map */
-.bigmap .bad-map{max-width:none!important}
+/* field map + place card */
+.fm{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:20px;align-items:start}
+.fm .bad-map{max-width:none!important}
+.place{position:sticky;top:64px;background:var(--paper);color:var(--pink);border:1px solid #71634d;box-shadow:0 10px 26px #0005;transition:background .7s,color .7s}
+.place .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#201d28;border-bottom:6px solid #fff}
+.place .ph img{width:100%;height:100%;object-fit:cover;transition:filter .7s}
+body.m-halloween .place .ph img.base{filter:brightness(.55) saturate(.8) hue-rotate(-15deg) sepia(.25)}
+body.m-halloween .place .ph::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,#e8742a40,transparent 60%),linear-gradient(0deg,#2b1f3a66,transparent);pointer-events:none}
+.place .gv{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:44px;background:#0007;color:#fff;font-size:24px;line-height:1;z-index:2}
+.place .gv.p{left:0;border-radius:0 4px 4px 0}.place .gv.n{right:0;border-radius:4px 0 0 4px}
+.place .gv:hover{background:#000a}
+.place .gd{position:absolute;left:0;right:0;bottom:8px;display:flex;justify-content:center;gap:5px;z-index:2}
+.place .gd i{width:7px;height:7px;border-radius:50%;background:#fff8}.place .gd i.on{background:#fff}
+.place .gc{position:absolute;right:8px;top:8px;font:500 11px var(--mono);background:#0008;color:#fff;padding:1px 7px;border-radius:3px;z-index:2}
+.place .psel{width:100%;margin-bottom:10px;padding:5px 8px;font:500 13px var(--sans);background:transparent;color:inherit;border:1px solid currentColor;border-radius:3px}
+.place .psel option{color:#2b2418}
+@media(max-width:600px){.fm .bm-pick{width:16px;height:16px}}
+.place .zoom{position:absolute;inset:0;background-repeat:no-repeat;background-size:520%;filter:saturate(1.05)}
+.place .zoom::after{content:"";position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;border:3px solid #c0392b;box-shadow:0 0 0 3px #fff8,0 0 12px #000}
+.place .zoom span{position:absolute;left:10px;bottom:8px;font:400 11px var(--type);letter-spacing:.12em;background:#efe6cce6;color:#2b2418;padding:1px 8px}
+.place .bd{padding:14px 16px 16px}
+.place .ar{font:500 11px var(--mono);letter-spacing:.1em;color:var(--accent)}
+.place h3{font:700 21px/1.3 var(--batang);margin-top:2px}
+.place h3 small{display:block;font:400 12px var(--type);letter-spacing:.08em;opacity:.7}
+.place p{font:400 14px/1.75 var(--sans);margin-top:10px}
+.place .use{border-top:1px dashed currentColor;margin-top:12px;padding-top:10px;opacity:.85}
+.place .use b{font:500 11px var(--mono);letter-spacing:.1em;display:block;color:var(--accent)}
+.place .rec{margin-top:10px;font:400 13px/1.55 var(--sans)}
+.place .rec div{padding:4px 0}
+.place .hint{font:500 11px var(--mono);opacity:.7;margin-top:10px}
+.fm .bm-pick{position:absolute;width:24px;height:24px;transform:translate(-50%,-50%);z-index:4;border-radius:50%;cursor:pointer;background:transparent}
+.fm .bm-pick:hover,.fm .bm-pick.on{box-shadow:0 0 0 3px #fff,0 0 0 6px #e8742a;background:#e8742a33}
+@media(max-width:860px){.fm{grid-template-columns:minmax(0,1fr)}.place{position:static}}
 
 /* radio legend */
 .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -129,13 +195,12 @@ body.m-halloween .modes button.on{background:var(--orange);color:#1d1226}
 @media(max-width:860px){.rgrid{grid-template-columns:1fr}}
 
 footer{padding:40px 0 60px;text-align:center;font:500 12px var(--mono);color:var(--muted)}
-footer a{color:var(--cream);border-bottom:1px solid #ffffff44}
+footer a{color:var(--title);border-bottom:1px solid var(--chip)}
 
-/* side map */
 #side summary::-webkit-details-marker{display:none}
 .rv{opacity:0;transform:translateY(14px);transition:opacity .7s,transform .7s}
 .rv.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.badge img{animation:none}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.badge img,.badge::before,.fx i{animation:none!important}.fx{display:none}}
 
 /* ── bot styles (from module) ── */
 .bad-radio{max-width:560px;margin:10px auto;background:#23241f;color:#e9e4d2;border-radius:6px;border:2px solid #111;box-shadow:inset 0 0 0 1px #4a4a40,0 4px 12px rgba(0,0,0,.45);overflow:hidden}
@@ -185,7 +250,7 @@ footer a{color:var(--cream);border-bottom:1px solid #ffffff44}
 </style>
 <script>
 /* ── KO / EN ── 한국어 원문은 HTML에 그대로 두고, 영어는 아래 사전에서 바꿔 끼워요. 문구를 고치면 사전의 같은 줄도 고쳐주세요. */
-const I18N={"뱅고어 애프터 다크": "Bangor After Dark", "동네 괴담을 수집하는 중학교 향토사 동아리. 무전기를 챙기고, 해가 지기 전에 돌아올 것.": "A middle school history club collecting neighborhood legends. Bring your radio. Be home before dark.", "라이트 호러": "Light horror", "미스터리": "Mystery", "성장물": "Coming-of-age", "앙상블": "Ensemble", "우리 동네에서 절대 하면 안 되는 일": "Things You Should Never Do in Our Neighborhood", "1987년 가을, 메인주 뱅고어. 브라이어우드 중학교 향토사 동아리의 다섯 아이는 스스로를": "Autumn 1987, Bangor, Maine. The five children of the Briarwood Middle School Local History Club call themselves", "나이트 시프트": "Night Shift", "라고 부른다. 할로윈 특집 책자 『우리 동네에서 절대 하면 안 되는 일』을 만들기 위해 동네 목격담을 모으는 중이다.": ". They are collecting local sightings for a Halloween booklet: Things You Should Never Do in Our Neighborhood.", "학교 제보함에는 분실물 항의부터 설명할 수 없는 만남까지 온갖 쪽지가 들어온다. 그리고 동네에서 가장 우스운 금기 몇 개는, 진짜 존재를 가리키고 있었다.": "The school tip box collects everything from lost-property complaints to inexplicable encounters. And some of the neighborhood's silliest prohibitions turn out to describe real beings.", "일상 모드": "Everyday Mode", "할로윈 모드": "Halloween Mode", "블랙 먼데이 다음 날. 학교, 동아리 활동, 가족과 이웃이 먼저이고, 기묘한 일은 배경에 머문다.": "The day after Black Monday. School, club projects, family, and neighbors come first; the uncanny stays in the background.", "축제와 책자 준비로 목격담이 늘어나고, 10월 31일이 다가올수록 사건이 움직이기 시작한다.": "The festival and the booklet bring more sightings, and incidents start moving as October 31 approaches.", "EVERYDAY · 1987.10.20 (화)": "EVERYDAY · OCT 20, 1987 (TUE)", "HALLOWEEN · 1987.10.24 (토)": "HALLOWEEN · OCT 24, 1987 (SAT)", "나이트 시프트 부원": "The Night Shift", "열두 살에서 열네 살. 숙제, 허락서, 용돈, 통금, 태워줄 어른이 늘 계획을 가로막는다. 무전기 호출부호는 정해져 있다.": "Ages twelve to fourteen. Homework, permission slips, allowance, curfews, and rides always get in the way. Every walkie-talkie has a callsign.", "네이트 파이크": "Nate Pike", "베스 머서": "Beth Mercer", "제이미 브룩스": "Jamie Brooks", "아이리스 벨": "Iris Bell", "오웬 레예스": "Owen Reyes", "13 · 8학년": "13 · 8th grade", "12 · 7학년": "12 · 7th grade", "14 · 8학년": "14 · 8th grade", "동아리 회장. 인터뷰를 짜고 계획을 세운다.": "Club president. Organizes interviews and makes the plans.", "장비·무전 담당. 개조 라디오 '크리퍼 미터'의 주인.": "Equipment and radio. Owner of the modified 'Creeper Meter'.", "민담 수집과 녹음 담당.": "Folklore collector and sound recorder.", "기록, 사진, 지도 담당.": "Documents, photographs, and maps.", "동네 탐문과 현장 지원 담당.": "Neighborhood interviews and field support.", "퍼스트 메시지 선택기": "First-message selector", "언어와 모드, 관계를 고르고 오프닝을 미리 본 뒤 확정합니다. 오른쪽 토글로 지도와 무전 표시 방식을 바꿔볼 수 있습니다.": "Pick a language, mode, and relationship, preview the opening, then confirm it. Use the toggles to change how the map and radio are displayed.", "동아리의 종이 지도": "The club's paper map", "응답마다 맨 아래에 지도 기록이 붙습니다. 위치에 마우스를 올리거나 누르면 장소 이름이 보이고, 같은 위치의 기록은 핀 하나로 묶입니다. 아래는 예시 기록입니다.": "Every response ends with a map record. Hover or tap a location to see its name; records at the same place share one pin. The records below are examples.", "무전 카드": "Radio cards", "들리는 대로만 표시됩니다. 수신 상태는 맑음 · 잡음 · 끊김 세 가지이고, 목소리의 주인은 확인된 사람만 이름이 붙습니다.": "Only what can be heard is shown. Reception is clear, static, or cut, and a voice is named only once its owner is known."};
+const I18N={"뱅고어 애프터 다크": "Bangor After Dark", "동네 괴담을 수집하는 중학교 향토사 동아리. 무전기를 챙기고, 해가 지기 전에 돌아올 것.": "A middle school history club collecting neighborhood legends. Bring your radio. Be home before dark.", "라이트 호러": "Light horror", "미스터리": "Mystery", "성장물": "Coming-of-age", "앙상블": "Ensemble", "우리 동네에서 절대 하면 안 되는 일": "Things You Should Never Do in Our Neighborhood", "1987년 가을, 메인주 뱅고어. 브라이어우드 중학교 향토사 동아리의 다섯 아이는 스스로를": "Autumn 1987, Bangor, Maine. The five children of the Briarwood Middle School Local History Club call themselves", "나이트 시프트": "Night Shift", "라고 부른다. 할로윈 특집 책자 『우리 동네에서 절대 하면 안 되는 일』을 만들기 위해 동네 목격담을 모으는 중이다.": ". They are collecting local sightings for a Halloween booklet: Things You Should Never Do in Our Neighborhood.", "학교 제보함에는 분실물 항의부터 설명할 수 없는 만남까지 온갖 쪽지가 들어온다. 그리고 동네에서 가장 우스운 금기 몇 개는, 진짜 존재를 가리키고 있었다.": "The school tip box collects everything from lost-property complaints to inexplicable encounters. And some of the neighborhood's silliest prohibitions turn out to describe real beings.", "일상 모드": "Everyday Mode", "할로윈 모드": "Halloween Mode", "블랙 먼데이 다음 날. 학교, 동아리 활동, 가족과 이웃이 먼저이고, 기묘한 일은 배경에 머문다.": "The day after Black Monday. School, club projects, family, and neighbors come first; the uncanny stays in the background.", "축제와 책자 준비로 목격담이 늘어나고, 10월 31일이 다가올수록 사건이 움직이기 시작한다.": "The festival and the booklet bring more sightings, and incidents start moving as October 31 approaches.", "EVERYDAY · 1987.10.20 (화)": "EVERYDAY · OCT 20, 1987 (TUE)", "HALLOWEEN · 1987.10.24 (토)": "HALLOWEEN · OCT 24, 1987 (SAT)", "나이트 시프트 부원": "The Night Shift", "열두 살에서 열네 살. 숙제, 허락서, 용돈, 통금, 태워줄 어른이 늘 계획을 가로막는다. 무전기 호출부호는 정해져 있다.": "Ages twelve to fourteen. Homework, permission slips, allowance, curfews, and rides always get in the way. Every walkie-talkie has a callsign.", "네이트 파이크": "Nate Pike", "베스 머서": "Beth Mercer", "제이미 브룩스": "Jamie Brooks", "아이리스 벨": "Iris Bell", "오웬 레예스": "Owen Reyes", "13 · 8학년": "13 · 8th grade", "12 · 7학년": "12 · 7th grade", "14 · 8학년": "14 · 8th grade", "동아리 회장. 인터뷰를 짜고 계획을 세운다.": "Club president. Organizes interviews and makes the plans.", "장비·무전 담당. 개조 라디오 '크리퍼 미터'의 주인.": "Equipment and radio. Owner of the modified 'Creeper Meter'.", "민담 수집과 녹음 담당.": "Folklore collector and sound recorder.", "기록, 사진, 지도 담당.": "Documents, photographs, and maps.", "동네 탐문과 현장 지원 담당.": "Neighborhood interviews and field support.", "퍼스트 메시지 선택기": "First-message selector", "언어와 모드, 관계를 고르고 오프닝을 미리 본 뒤 확정합니다. 오른쪽 토글로 지도와 무전 표시 방식을 바꿔볼 수 있습니다.": "Pick a language, mode, and relationship, preview the opening, then confirm it. Use the toggles to change how the map and radio are displayed.", "동아리의 종이 지도": "The club's paper map", "응답마다 맨 아래에 지도 기록이 붙습니다. 위치에 마우스를 올리거나 누르면 장소 이름이 보이고, 같은 위치의 기록은 핀 하나로 묶입니다. 아래는 예시 기록입니다.": "Every response ends with a map record. Hover or tap a location to see its name; records at the same place share one pin. The records below are examples.", "무전 카드": "Radio cards", "응답마다 맨 아래에 지도 기록이 붙습니다. 같은 위치의 기록은 핀 하나로 묶입니다. 지도에서 장소를 누르면 그곳의 모습과 설명이 열립니다.": "Every response ends with a map record; records at the same place share one pin. Tap a place on the map to open its card.", "들리는 대로만 표시됩니다. 수신 상태는 맑음 · 잡음 · 끊김 세 가지이고, 목소리의 주인은 확인된 사람만 이름이 붙습니다.": "Only what can be heard is shown. Reception is clear, static, or cut, and a voice is named only once its owner is known."};
 const I18N_KEYS=Object.keys(I18N).filter(k=>k.length>1).sort((a,b)=>b.length-a.length);
 let LANG=(()=>{const q=new URLSearchParams(location.search).get('lang');if(q==='ko'||q==='en')return q;try{const s=localStorage.getItem('shk_lang');if(s)return s}catch(e){}return (navigator.language||'ko').toLowerCase().startsWith('ko')?'ko':'en'})();
 const I18N_ORIG=new WeakMap();
@@ -201,6 +266,7 @@ document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.lg
 </script>
 </head>
 <body class="m-everyday">
+<div class="fx" id="fx" aria-hidden="true"></div><div class="vign" aria-hidden="true"></div>
 
 <header class="bar"><div class="wrap">
   <span class="lg"><img src="assets/badge.png" alt="">NIGHT SHIFT</span>
@@ -212,12 +278,14 @@ document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.lg
 <section class="hero">
   <div class="bgm" style="background-image:url(assets/map_1987.webp)"></div>
   <div class="bgm hw" style="background-image:url(assets/map_halloween.webp)"></div>
+  <div class="ov ed"></div><div class="ov hw"></div>
   <div class="in">
     <div class="badge"><img src="assets/badge.png" alt="Night Shift"></div>
     <h1><span>BANGOR</span><b>AFTER DARK</b></h1>
     <div class="sub">NIGHT SHIFT · MAINE · 1987</div>
     <div class="ko">뱅고어 애프터 다크</div>
     <p class="lead">동네 괴담을 수집하는 중학교 향토사 동아리. 무전기를 챙기고, 해가 지기 전에 돌아올 것.</p>
+    <div class="date"><span class="ed-only">TUE · OCT 20, 1987 · 3:40 P.M.</span><span class="hw-only">SAT · OCT 24, 1987 · 7 DAYS TO HALLOWEEN</span></div>
     <div class="modes" id="heroModes"><button data-m="everyday">EVERYDAY<small>1987.10.20</small></button><button data-m="halloween">HALLOWEEN<small>1987.10.24</small></button></div>
     <div class="tags"><span>라이트 호러</span><span>미스터리</span><span>성장물</span><span>앙상블</span><span>1987</span></div>
   </div>
@@ -231,8 +299,8 @@ document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.lg
     <p>1987년 가을, 메인주 뱅고어. 브라이어우드 중학교 향토사 동아리의 다섯 아이는 스스로를 <em>나이트 시프트</em>라고 부른다. 할로윈 특집 책자 『우리 동네에서 절대 하면 안 되는 일』을 만들기 위해 동네 목격담을 모으는 중이다.</p>
     <p>학교 제보함에는 분실물 항의부터 설명할 수 없는 만남까지 온갖 쪽지가 들어온다. 그리고 동네에서 가장 우스운 금기 몇 개는, 진짜 존재를 가리키고 있었다.</p>
     <div class="mcards">
-      <div class="mc"><small>EVERYDAY · 1987.10.20 (화)</small><b>일상 모드</b><p>블랙 먼데이 다음 날. 학교, 동아리 활동, 가족과 이웃이 먼저이고, 기묘한 일은 배경에 머문다.</p></div>
-      <div class="mc hw"><small>HALLOWEEN · 1987.10.24 (토)</small><b>할로윈 모드</b><p>축제와 책자 준비로 목격담이 늘어나고, 10월 31일이 다가올수록 사건이 움직이기 시작한다.</p></div>
+      <div class="mc ed" data-m="everyday"><small>EVERYDAY · 1987.10.20 (화)</small><b>일상 모드</b><p>블랙 먼데이 다음 날. 학교, 동아리 활동, 가족과 이웃이 먼저이고, 기묘한 일은 배경에 머문다.</p></div>
+      <div class="mc hw" data-m="halloween"><small>HALLOWEEN · 1987.10.24 (토)</small><b>할로윈 모드</b><p>축제와 책자 준비로 목격담이 늘어나고, 10월 31일이 다가올수록 사건이 움직이기 시작한다.</p></div>
     </div>
   </div>
 </div></section>
@@ -260,8 +328,8 @@ document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.lg
 </div></section>
 
 <section class="sec" id="map"><div class="wrap">
-  <div class="sh rv"><div class="k">FIELD MAP</div><h2>동아리의 종이 지도</h2><p>응답마다 맨 아래에 지도 기록이 붙습니다. 위치에 마우스를 올리거나 누르면 장소 이름이 보이고, 같은 위치의 기록은 핀 하나로 묶입니다. 아래는 예시 기록입니다.</p></div>
-  <div class="bigmap rv" id="bigMap" data-noi18n></div>
+  <div class="sh rv"><div class="k">FIELD MAP</div><h2>동아리의 종이 지도</h2><p>응답마다 맨 아래에 지도 기록이 붙습니다. 같은 위치의 기록은 핀 하나로 묶입니다. 지도에서 장소를 누르면 그곳의 모습과 설명이 열립니다.</p></div>
+  <div class="fm rv" data-noi18n><div id="bigMap"></div><aside class="place" id="place"></aside></div>
 </div></section>
 
 <section class="sec" id="radio"><div class="wrap">
@@ -308,9 +376,11 @@ function mapHTML(m,opt={}){
   // location name targets (diner + apartment share one target)
   const tg={},tk=[];
   Object.keys(LOC).forEach(k=>{const p=LOC[k],key=p[0]+':'+p[1];if(!tg[key]){tg[key]={x:p[0],y:p[1],names:[]};tk.push(key)}tg[key].names.push(lname(k))});
-  tk.forEach(key=>{const q=tg[key],label=esc(q.names.join(' / '));const h=q.x>70?'right:0;':q.x<25?'left:0;':'left:50%;transform:translateX(-50%);';const v=q.y>75?'bottom:26px;':'top:26px;';
+  if(opt.pick){const grp={};Object.keys(LOC).forEach(k=>{const p=LOC[k],key=p[0]+':'+p[1];(grp[key]=grp[key]||[]).push(k)});
+    Object.values(grp).forEach(ids=>{const p=LOC[ids[0]];const label=esc(ids.map(lname).join(' / '));out.push(`<button class="bm-pick${ids.includes(S.placeId)?' on':''}" data-loc="${ids.join(',')}" title="${label}" aria-label="${label}" style="left:${p[0]}%;top:${p[1]}%"></button>`)});}
+  else tk.forEach(key=>{const q=tg[key],label=esc(q.names.join(' / '));const h=q.x>70?'right:0;':q.x<25?'left:0;':'left:50%;transform:translateX(-50%);';const v=q.y>75?'bottom:26px;':'top:26px;';
     out.push(`<details class="bm-place" style="position:absolute;left:${q.x}%;top:${q.y}%;width:22px;height:22px;transform:translate(-50%,-50%);z-index:4;line-height:1.3;"><summary title="${label}" aria-label="${label}" style="display:block;width:22px;height:22px;list-style:none;border-radius:50%;cursor:help;touch-action:manipulation;"></summary><span class="bm-place-name" style="position:absolute;${h}${v}width:max-content;max-width:150px;padding:6px 8px;background:${paper};color:${ink};border:1px solid ${ink};border-radius:4px;box-shadow:0 2px 8px #0008;font:12px/1.4 sans-serif;text-align:center;pointer-events:none;">${label}</span></details>`)});
-  out.push(`</div><div style="margin:7px 0 2px;color:${muted};font:11px/1.4 sans-serif">${tr('위치 위에 마우스를 올리거나 눌러 이름 확인 · 다시 누르면 닫힘','Hover or tap a location for its name · Tap again to close')}</div><div style="margin-top:8px">${rows.length?rows.join(''):tr('기록된 목격·소문 없음','No recorded sightings or rumors')}</div>`);
+  out.push(`</div><div style="margin:7px 0 2px;color:${muted};font:11px/1.4 sans-serif">${opt.pick?tr('장소를 누르면 장소 카드가 열립니다','Tap a location to open its card'):tr('위치 위에 마우스를 올리거나 눌러 이름 확인 · 다시 누르면 닫힘','Hover or tap a location for its name · Tap again to close')}</div><div style="margin-top:8px">${rows.length?rows.join(''):tr('기록된 목격·소문 없음','No recorded sightings or rumors')}</div>`);
   out.push(`<div style="display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:8px;font:11px/1.4 sans-serif;color:${muted}">`+KINDS.map(k=>`<span><b style="color:${COLORS[k[0]]}">●</b> ${tr(k[1],k[2])}</span>`).join('')+'</div></div>');
   return out.join('');
 }
@@ -427,8 +497,37 @@ function renderBig(){
   const hw=S.mode==='halloween';
   const P=hw?[['C02','SCHOOL','reported',tr('기록실, 제보함 확인 중','Checking the tip box')],['RUMOR','THEATER','unconfirmed',tr('뒷줄 관객은 못 나간다','The trapped back row')],['C05','ARCADE','last',tr('오락실 앞에서 헤어짐','Split up at the arcade')],['RUMOR','EMPTY_HOUSES','unconfirmed',tr('헐린 집 초인종','Doorbell, no house')],['RUMOR','PUMP','resolved',tr('물소리였음','Just the water')]]
            :[['RUMOR','EMPTY_HOUSES','unconfirmed',tr('헐린 집 초인종','Doorbell, no house')],['RUMOR','FINCH_HOME','unconfirmed',tr('밤마다 기계 웃음소리','Mechanical laughter')],['C04','LIBRARY','last',tr('도서관 마감까지','At the library till close')],['C01','GARAGE','reported',tr('형 차 빌리는 중','Borrowing his brother’s car')],['RUMOR','VIDEO','unconfirmed',tr('라벨 없는 테이프','An unmarked VHS')]];
-  $('#bigMap').innerHTML=mapHTML({date:hw?tr('1987-10-24 (토)','1987-10-24 (Sat)'):tr('1987-10-20 (화)','1987-10-20 (Tue)'),time:hw?tr('오후 4:50','4:50 PM'):tr('오후 3:40','3:40 PM'),loc:hw?'FAIRGROUND':'SCHOOL',pins:P});
+  BIG={date:hw?tr('1987-10-24 (토)','1987-10-24 (Sat)'):tr('1987-10-20 (화)','1987-10-20 (Tue)'),time:hw?tr('오후 4:50','4:50 PM'):tr('오후 3:40','3:40 PM'),loc:hw?'FAIRGROUND':'SCHOOL',pins:P};$('#bigMap').innerHTML=mapHTML(BIG,{pick:true});
+  $$('#bigMap .bm-pick').forEach(b=>b.onclick=()=>{S.placeIds=b.dataset.loc.split(',');S.placeId=S.placeIds[0];$$('#bigMap .bm-pick').forEach(x=>x.classList.toggle('on',x===b));renderPlace()});
+  renderPlace();
 }
+const PLX={"A": {"DT": ["다운타운", "Downtown"], "WS": ["웨스트사이드", "West Side"], "NE": ["북동부", "Northeast Side"], "NW": ["북서쪽 숲길", "Northwest"], "WF": ["강변 도로·숲", "Waterfront & Woods"], "GR": ["그린", "The Green"], "RV": ["강변", "Riverside"]}, "P": {"SCHOOL": ["WS", "구관이 딸린 벽돌 중학교. 동아리는 수동 타자기, 종이 지도, 신문 스크랩, 카세트 녹음기와 제보함이 있는 작은 기록실을 쓴다.", "A brick middle school with an older wing. The club works from a small records room with a manual typewriter, a paper map, clippings, a cassette recorder, and the tip box.", "수업, 숙제, 동아리 회의, 인터뷰, 허락서, 할로윈 특집호 준비.", "Classes, homework, club meetings, interviews, permission slips, booklet prep."], "HIGH_SCHOOL": ["NE", "체육관과 운동장, 관중석, 사물함이 있는 고등학교. 게시판은 댄스파티와 경기 공지로 빼곡하다. 동아리 아이들의 학교는 아니다.", "A high school with a gym, athletic field, bleachers, and lockers; the notice board is crowded with dances and games. Not the club’s school.", "바네사의 수업과 응원 연습, 학교 행사, 차 얻어 타기, 형·누나들의 사교 생활.", "Vanessa’s classes and cheer practice, school events, rides, older students’ social lives."], "ROWAN_SHOP": ["DT", "생활용품, 양초, 실, 작은 공구, 계절 물건을 파는 좁은 잡화점. 수선 카운터와 꽉 찬 서랍이 있다.", "A narrow general store with household goods, candles, thread, small tools, and seasonal supplies, plus a mending counter.", "손전등 배터리 사기, 찢어진 재킷 맡기기, 집 심부름, 동네 소문 듣기.", "Flashlight batteries, a torn jacket, family errands, neighborhood gossip."], "VIDEO": ["DT", "VHS 선반, 종이 영화 입간판, 반납함, 손글씨 추천 카드, 카운터 위 작은 TV. 사장 칼은 공포영화를 사랑하지만 연체료도 받아야 한다.", "VHS shelves, cardboard displays, a return slot, handwritten staff picks, and a counter TV. Cal loves horror films but still has to collect late fees.", "영화 대여, 괴물 논쟁, 동네 행사 테이프 보기, 장비 빌리기 협상.", "Rentals, monster debates, local event tapes, negotiating equipment loans."], "THEATER": ["DT", "복원된 일반 상영관은 1987년에도 영화를 튼다. 1954년 화재 뒤 원래 객석과 옆 통로는 봉쇄된 채 칸막이로 나뉘어 있다.", "An old cinema whose restored section still screens films. The original auditorium and service passages have been sealed off since a 1954 fire.", "낮 상영, 가족 나들이, 데이트, 영화 포스터, 간판 아래 약속.", "Matinees, family outings, dates, posters, meeting under the marquee."], "LIBRARY": ["DT", "카드 목록함, 신문철, 동네 주소록, 옛 지도와 향토사 열람실이 있는 도서관. 사서 노라는 기록 찾는 법을 안다. 모든 답을 아는 건 아니지만.", "Card catalogs, newspaper files, directories, old maps, and a local-history reading room. Nora knows where records are, if not every answer.", "숙제, 책자 자료 조사, 인터뷰 질문 짜기, 날짜 대조, 가을비 피하기.", "Homework, booklet research, interview prep, comparing dates, sheltering from rain."], "DINER": ["DT", "비닐 부스, 카운터, 주크박스, 벽걸이 전화가 있는 작은 가족 식당. 커피와 그릴 냄새가 위층까지 따라 올라간다.", "A modest family diner with vinyl booths, a counter, a jukebox, and a wall phone. The smell of coffee follows everyone upstairs.", "방과 후 간식, 오웬의 가게 일, 주민 인터뷰, 가족 식사.", "After-school snacks, Owen’s chores, resident interviews, family meals."], "REYES_HOME": ["DT", "다이너 옆 따로 난 계단으로 올라가는 레예스네 집. 오웬의 학교 물건과 바네사가 지키는 옷장이 아래층 가게와는 다른 공기를 만든다.", "The Reyes family rooms, up a separate stair beside the diner. Owen’s school things and Vanessa’s guarded wardrobe set it apart from the business below.", "남매 싸움, 옷 갈아입기, 집안일, 늦은 귀가, 가게 문 닫은 뒤의 조용한 대화.", "Sibling bickering, outfit changes, chores, late returns, quiet talks after closing."], "FAIRGROUND": ["GR", "산책로와 벤치, 야외 음악당, 임시 노점 자리가 있는 작은 동네 공원. 축제 때는 주민들이 이곳을 페스티벌 광장이라 부른다.", "A small park with paths, benches, a bandstand, and room for stalls. Residents call its event area Festival Square during festivals.", "피크닉, 지름길, 동네 게시판, 공연, 우연한 만남.", "Picnics, shortcuts, community notices, performances, chance meetings."], "GARAGE": ["WS", "네이트와 딜런의 집, 그리고 아버지의 작은 정비소. 기름 묻은 작업대, 부품 선반, 밖에서 기다리는 자전거들, 작업 중에 켜둔 라디오.", "Nate and Dylan’s home beside their father’s repair garage: oily workbenches, a parts shelf, bikes waiting outside, a radio playing.", "네이트의 집안일, 딜런의 일, 자전거 정비, 차 얻어 타기, 빌린 공구 다툼.", "Home life, Dylan’s job, bike repairs, car rides, arguments over borrowed tools."], "WORKSHOP": ["WS", "베스네 집과 할아버지 월터의 작업실. 이름표 붙은 부품 서랍, 작업등, 납땜 장비, 고치다 만 라디오들, 잠긴 도면 상자.", "Beth’s home and Walter’s workshop: labeled parts drawers, work lamps, soldering gear, half-repaired radios, a locked box of diagrams.", "숙제, 카세트 믹스, 수리, 장비 테스트, 뭘 빌려도 되는지 협상.", "Homework, mixtapes, repairs, equipment tests, negotiating what Beth may borrow."], "BROOKS_HOME": ["WS", "제이미의 영화 스크랩과 괴물 그림, TV와 VCR이 있는 따뜻한 집. 엄마 메이는 불쑥 온 손님을 먹이면서 캐묻는다.", "A warm house with Jamie’s movie clippings, monster drawings, a TV and VCR, and a kitchen where Mae feeds unexpected guests while questioning them.", "허락받은 밤샘, 공포영화의 밤, 숙제, 회복, 엄마 교대 시간 맞춰 연락하기.", "Sleepovers, horror-movie nights, homework, recovery, checking in around Mae’s shifts."], "BELL_HOME": ["NE", "아이리스와 할머니 노라가 사는 오래된 집. 이름표 붙은 앨범과 책, 집안 물건, 아직 다 정리하지 못한 다락 상자들.", "Iris and Nora’s modest old house with labeled albums, books, keepsakes, and attic boxes not yet catalogued.", "사진 정리, 조용한 식사, 카드 게임, 집안 역사 이야기로 번지는 조사.", "Labeling photos, quiet meals, card games, research that turns into family history."], "FINCH_HOME": ["WS", "현관 포치와 망가진 잔디밭, 의자 옆 경제면 신문. 창고에는 무대 세트, 삑삑 소리 나는 소품, 의상과 수리 도구가 가득하다.", "A weathered house with a battered lawn and financial pages by the chair, plus a shed full of stage flats, squeaky props, costumes, and repair supplies.", "고디의 생활과 생계, 소품 대여 분쟁, 풍선 동물, 피해 청구서, 젖은 아이들에게 마지못해 내주는 따뜻한 차.", "Gordie’s livelihood, prop disputes, balloon animals, damage bills, reluctant warm drinks."], "VALE_HOUSE": ["WS", "어두운 커튼, 잘 정돈된 정원, 잘 관리된 책들. 불은 보통 해가 진 뒤에 켜진다. 집주인은 사생활과 이웃 간의 예의를 중시한다.", "An old house with dark curtains, an orderly garden, and well-kept books. Its lights usually come on after sunset; its occupant values privacy and good manners.", "배달, 빌린 책 돌려주기, 옛 사진에 대한 질문, 미리 약속한 저녁 방문.", "Deliveries, returning a book, questions about an old photo, arranged evening visits."], "RIVER_STOP": ["RV", "산책로, 벤치, 난간, 오래된 관리 통로와 버스 정류장. 물소리와 차 소리, 바람이 들은 것을 헷갈리게 만든다.", "Walking paths, benches, railings, old service approaches, and a bus stop. Water, traffic, and wind can confuse what someone heard.", "차 기다리기, 방과 후 만남, 사진 찍기, 간식, 집 밖에서 하는 이야기.", "Waiting for rides, meeting after school, photos, snacks, talking away from home."], "RIVER_WOODS": ["WF", "오솔길과 젖은 낙엽, 바위투성이 땅, 오래된 오두막, 돌보지 않은 작은 묘지. 아이들이 반쯤만 아는 곳이다.", "Trails, wet leaves, rocky ground, an old cabin, and a small neglected burial plot: a place the children only partly know.", "낮 산책, 이야기 수집, 사진, 어른이 동행하는 현장 학습.", "Daytime walks, collecting stories, photographs, supervised field trips."], "PUMP": ["WF", "녹슨 기계와 배수관, 축축한 바닥이 있는 벽돌 설비 건물. 들어가는 길이 여럿이고, 비는 피할 수 있지만 무너질 곳도 많다.", "A brick utility building with rusted machinery, a culvert, and damp floors. Several ways in; shelter with real structural hazards.", "동아리 건물사 프로젝트, 주민 이야기 속 단골 랜드마크.", "The club’s building-history project; a landmark in residents’ stories."], "LAB": ["WF", "봉쇄된 옛 연구 건물. 뜯겨 나간 실험대, 창고, 손상된 기록과 특수 장비의 잔해. 누구 소유였는지는 조사로 밝혀진다.", "A sealed former research building with stripped benches, storerooms, damaged records, and leftover specialized equipment.", "문서 조사와 바깥 답사. 들어갈 이유가 생기기 전까지는.", "Documentary research and exterior surveys, before any properly motivated entry."], "EMPTY_HOUSES": ["NE", "판자로 막은 창문, 지워져 가는 번지수, 버려진 마당. 이웃들도 누가 살았는지 기억이 엇갈린다. 그냥 빈집인 곳도 있다.", "Boarded windows, fading house numbers, untended yards, and homes neighbors disagree about remembering. Some houses are simply empty.", "옛 주민 조사, 소유권 변동, 책자에 실을 오래된 초인종 소문.", "Former residents, ownership changes, an old doorbell rumor for the booklet."], "RELAY": ["NW", "안테나 구조물과 옛 케이블 길, 떼어낸 배전반, 낡은 표지판이 남은 폐쇄된 중계소. 1967년 낙뢰 사고의 현장.", "A decommissioned relay building with an aerial structure, old cable routes, disconnected panels, and weathered signs. Site of the 1967 lightning accident.", "기록과 월터를 거쳐 접근해야 하는 어려운 향토사 주제.", "A difficult local-history subject, approached through archives and Walter first."], "AUTO": ["WF", "정비 베이와 어수선한 사무실, 예비 타이어. 차 수리 사이사이 자전거도 손봐준다. 파이크네 정비소와는 다른 가게다.", "Repair bays, a cluttered office, spare tires, and bicycles fixed between car jobs. A separate business from the Pike garage.", "오웬의 자전거 수리, 실용적인 조언, 동네 심부름, 익숙한 어른과의 대화.", "Owen’s bike repairs, practical advice, errands, talks with a familiar adult."], "POLICE": ["DT", "안내 데스크, 전화와 무전기, 조사실, 평범한 서류 더미가 있는 동네 경찰서.", "A local station with a front desk, telephones, radios, interview rooms, and ordinary paperwork.", "분실물·실종 신고, 진술, 물건 찾아가기, 도움 요청.", "Reporting missing things or people, statements, recovering property, getting help."], "HOSPITAL": ["NE", "접수처와 대기실, 진료 공간, 교대 시간이 있는 지역 병원.", "A hospital with reception, waiting rooms, treatment spaces, and shift changes.", "메이의 일터, 다친 친구 병문안, 치료, 휴식, 위험한 선택의 대가.", "Mae’s work, visiting an injured friend, treatment, rest, consequences."], "ARCADE": ["DT", "오락기 캐비닛, 핀볼, 빛나는 간판, 동전 교환 카운터와 공중전화. 점수는 기계마다 따로 남는다.", "Upright cabinets, pinball, glowing marquees, a change counter, and a payphone. High scores live on each machine.", "친구끼리 경쟁, 용돈 쓰기, 비 피하기, 집에 전화해 데리러 와 달라고 하기.", "Friendly rivalry, spending allowance, shelter from rain, calling home for a ride."], "RINK": ["WS", "대여 스케이트, 반질반질한 바닥, 미러볼과 색 조명, DJ 부스, 사물함과 스낵 카운터. 음악은 레코드와 테이프로 튼다.", "Rental skates, a polished floor, a mirror ball, colored lights, a DJ booth, lockers, and a snack counter. Music comes from records and tapes.", "단체 나들이, 스케이트 강습, 생일 파티, 서툰 첫 시도, 형·누나들의 저녁.", "Group outings, lessons, birthday parties, clumsy first tries, older teens’ evenings."]}};const LOCN={"GARAGE": 1, "BROOKS_HOME": 1, "FAIRGROUND": 1, "BELL_HOME": 1, "WORKSHOP": 1, "VALE_HOUSE": 1, "REYES_HOME": 1, "DINER": 1, "LIBRARY": 1, "VIDEO": 1, "HIGH_SCHOOL": 1, "SCHOOL": 1, "ROWAN_SHOP": 1, "THEATER": 1, "POLICE": 1, "ARCADE": 1, "RINK": 1, "RELAY": 1, "LAB": 1, "AUTO": 1, "EMPTY_HOUSES": 1, "RIVER_WOODS": 1, "RIVER_STOP": 1, "PUMP": 1};let BIG=null;S.placeId='SCHOOL';S.placeIds=['SCHOOL'];
+function renderPlace(){
+  const id=S.placeId,info=PLX.P[id],L=LOC[id],hw=S.mode==='halloween',e=en()?1:0;
+  const tabs=S.placeIds.length>1?`<div style="display:flex;gap:6px;margin-bottom:8px">${S.placeIds.map(k=>`<button data-pl="${k}" style="font:500 11.5px var(--mono);padding:2px 8px;border:1px solid currentColor;border-radius:3px;${k===id?'background:var(--accent);color:#fff;border-color:var(--accent)':''}">${esc(lname(k))}</button>`).join('')}</div>`:'';
+  const recs=(BIG?BIG.pins:[]).filter(p=>p[1]===id).map(p=>`<div><span style="color:${COLORS[p[2]]}">●</span> <b>${esc(wname(p[0]))}</b> · ${esc(p[3])}</div>`);
+  if(BIG&&BIG.loc===id)recs.unshift(`<div><span style="color:#c0392b">●</span> <b>YOU</b> · ${tr('현재 위치','current location')}</div>`);
+  const opts=Object.keys(LOC).map(k=>`<option value="${k}"${k===id?' selected':''}>${esc(lname(k))}</option>`).join('');
+  $('#place').innerHTML=`<div class="ph" id="plph"></div><div class="bd"><select class="psel" aria-label="place">${opts}</select>${tabs}<div class="ar">${id} · ${esc(PLX.A[info[0]][e])}</div><h3>${esc(lname(id))}<small>${esc(en()?LOC[id][2]:LOC[id][3])}</small></h3><p>${esc(info[1+e])}</p><div class="use"><b>${tr('이럴 때 들른다','WHY YOU’D GO')}</b>${esc(info[3+e])}</div>${recs.length?`<div class="rec">${recs.join('')}</div>`:''}</div>`;
+  $$('#place [data-pl]').forEach(b=>b.onclick=()=>{S.placeId=b.dataset.pl;renderPlace()});
+  $('#place .psel').onchange=e=>{const k=e.target.value,key=LOC[k][0]+':'+LOC[k][1];S.placeIds=Object.keys(LOC).filter(x=>LOC[x][0]+':'+LOC[x][1]===key);S.placeId=k;$$('#bigMap .bm-pick').forEach(x=>x.classList.toggle('on',x.dataset.loc.split(',').includes(k)));renderPlace()};
+  // photo gallery: assets/loc/{ID}_1..n.webp (LOCN) → map detail
+  const ph=$('#plph'),n=LOCN[id]||0;
+  const zoom=()=>{const z=5.2,zy=z*1100/1600/0.75,fx=L[0]/100,fy=L[1]/100,cl=v=>Math.max(0,Math.min(1,v));
+    const px=cl((fx*z-.5)/(z-1)),py=cl((fy*zy-.5)/(zy-1)),dx=((1-z)*px+fx*z)*100,dy=((1-zy)*py+fy*zy)*100;
+    ph.innerHTML=`<div class="zoom" style="background-image:url(assets/${hw?'map_halloween':'map_1987'}.webp);background-position:${px*100}% ${py*100}%"><span>FIELD MAP · DETAIL</span></div>`;
+    const st=document.createElement('style');st.textContent=`#plph .zoom::after{left:${dx}%;top:${dy}%}`;ph.appendChild(st)};
+  if(!n)return zoom();
+  let gi=0;
+  const show=()=>{ph.innerHTML=`<img class="base" src="assets/loc/${id}_${gi+1}.webp" alt="${esc(lname(id))}">`+(n>1?`<button class="gv p" aria-label="prev">‹</button><button class="gv n" aria-label="next">›</button><div class="gd">${Array.from({length:n},(_,i)=>`<i class="${i===gi?'on':''}"></i>`).join('')}</div>`:'')+`<span class="gc">${gi+1} / ${n}</span>`;
+    const pb=ph.querySelector('.p'),nb=ph.querySelector('.n');if(pb){pb.onclick=()=>{gi=(gi-1+n)%n;show()};nb.onclick=()=>{gi=(gi+1)%n;show()}}
+    for(let i=1;i<n;i++){const im=new Image();im.src=`assets/loc/${id}_${(gi+i)%n+1}.webp`}};
+  show();
+}
+(function fx(){const f=$('#fx'),C=['#c4561f','#d9822b','#b5432c','#d6a531','#8a5a2b'];let h='';
+  for(let i=0;i<8;i++)h+=`<i class="lf" style="left:${Math.random()*100}%;background:${C[i%5]};--dx:${(Math.random()*30-15)}vw;animation-duration:${9+Math.random()*9}s;animation-delay:-${Math.random()*14}s"></i>`;
+  for(let i=0;i<6;i++)h+=`<i class="bt" style="--y:${8+Math.random()*60}vh;animation-duration:${10+Math.random()*10}s;animation-delay:-${Math.random()*18}s;transform:scale(${.6+Math.random()*.7})"></i>`;
+  f.innerHTML=h})();
 /* ── radio sample ── */
 function renderRadio(){
   const save=S.radio;S.radio='0';
@@ -441,10 +540,10 @@ function renderRadio(){
 function setMode(m,fromSel){
   if(S.stage==='confirmed'&&!fromSel)return;
   S.mode=m;document.body.className='m-'+m;
-  $$('#heroModes button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
+  $$('#heroModes button,.mc[data-m]').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
 }
-function renderAll(){$$('#heroModes button').forEach(b=>b.classList.toggle('on',b.dataset.m===S.mode));renderSel();renderTg();renderBig();renderRadio()}
-$$('#heroModes button').forEach(b=>b.onclick=()=>{if(S.stage==='confirmed'){Object.assign(S,{stage:'select',page:'1'})}setMode(b.dataset.m);renderAll()});
+function renderAll(){$$('#heroModes button,.mc[data-m]').forEach(b=>b.classList.toggle('on',b.dataset.m===S.mode));renderSel();renderTg();renderBig();renderRadio()}
+$$('#heroModes button,.mc[data-m]').forEach(b=>b.onclick=()=>{if(S.stage==='confirmed'){Object.assign(S,{stage:'select',page:'1'})}setMode(b.dataset.m);renderAll()});
 window.onLangChange=()=>{S.lang=LANG;renderAll()};
 setMode('everyday');
 document.addEventListener('DOMContentLoaded',()=>{S.lang=LANG;renderAll()});
