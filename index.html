@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bangor After Dark — 뱅고어 애프터 다크</title>
+<meta name="description" content="1987년 메인주 뱅고어. 동네 괴담을 수집하는 중학교 향토사 동아리 '나이트 시프트'.">
+<meta property="og:title" content="Bangor After Dark — 뱅고어 애프터 다크">
+<meta property="og:description" content="1987년 메인주 뱅고어. 동네 괴담을 수집하는 중학교 향토사 동아리 '나이트 시프트'.">
+<meta property="og:image" content="assets/og.jpg">
+<link rel="icon" href="assets/badge.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&family=Gowun+Batang:wght@400;700&family=Zilla+Slab:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--night:#1c1a2c;--night2:#26233a;--night3:#322e4a;--cream:#efe6cc;--cream2:#e4d7b4;--ink:#2b2418;--green:#2f4a35;--green2:#22362a;--orange:#e8742a;--lilac:#b9a3d6;--muted:#9d93b8;--line:#ffffff1f;
+  --type:'Special Elite','Courier New',monospace;--sans:'IBM Plex Sans KR',sans-serif;--mono:'IBM Plex Mono','IBM Plex Sans KR',monospace;--batang:'Gowun Batang',serif;--slab:'Zilla Slab',Georgia,serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--night);color:#e9e4f2;font-family:var(--sans);line-height:1.75;font-size:15px;
+  background-image:radial-gradient(#ffffff08 1px,transparent 1.2px);background-size:18px 18px}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:50;background:#1c1a2ce6;backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:16px;height:48px}
+.bar .lg{font:400 13px var(--type);letter-spacing:.16em;color:var(--cream);margin-right:auto;display:flex;align-items:center;gap:8px}
+.bar .lg img{width:24px;height:24px}
+.bar nav{display:flex;gap:16px;font:500 12px var(--mono);letter-spacing:.08em;color:var(--muted)}
+.bar nav a:hover{color:var(--orange)}
+.bar .bk{font:500 12px var(--mono);letter-spacing:.08em;border:1px solid #ffffff33;padding:3px 10px;border-radius:3px}
+.bar .bk:hover{border-color:var(--orange);color:var(--orange)}
+.lgsw{display:flex;border:1px solid #ffffff33;border-radius:3px;overflow:hidden}
+.lgsw button{font:500 11px var(--mono);padding:3px 9px;color:var(--muted)}
+.lgsw button.on{background:var(--cream);color:var(--ink)}
+@media(max-width:760px){.bar nav{display:none}}
+
+/* hero */
+.hero{position:relative;min-height:min(760px,100svh);display:flex;align-items:center;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero .bgm{position:absolute;inset:-4%;background:center/cover;filter:saturate(.9);transition:opacity .8s}
+.hero .bgm.hw{opacity:0}
+body.m-halloween .hero .bgm.hw{opacity:1}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,#1c1a2c55,#1c1a2cee 70%),linear-gradient(0deg,var(--night),transparent 30%)}
+.hero .in{position:relative;z-index:2;text-align:center;width:100%;padding:70px 20px 60px}
+.badge{width:min(250px,56vw);margin:0 auto;position:relative;filter:drop-shadow(0 14px 30px #000a)}
+.badge img{width:100%;animation:flick 7s infinite}
+@keyframes flick{0%,92%,100%{filter:none}93%{filter:brightness(.55)}94%{filter:none}96%{filter:brightness(.7)}}
+.hero h1{font:700 clamp(46px,8vw,92px)/.98 var(--slab);letter-spacing:.06em;margin-top:26px}
+.hero h1 span{display:block;color:var(--cream)}
+.hero h1 b{display:block;color:var(--orange)}
+.hero .sub{font:500 clamp(12px,1.6vw,16px) var(--mono);letter-spacing:.42em;color:#d8d0ef;margin-top:16px}
+.hero .ko{font:700 20px var(--batang);color:var(--cream);margin-top:18px}
+.hero .lead{font:400 15.5px/1.8 var(--batang);color:#cfc7e2;max-width:520px;margin:10px auto 0}
+.modes{display:inline-flex;margin-top:26px;border:1.5px solid var(--cream);border-radius:3px;overflow:hidden}
+.modes button{padding:8px 18px;font:500 12px var(--mono);letter-spacing:.12em;color:var(--cream);text-align:left;line-height:1.3}
+.modes button small{display:block;font:400 10.5px var(--mono);opacity:.7;letter-spacing:.06em}
+.modes button.on{background:var(--cream);color:var(--ink)}
+body.m-halloween .modes{border-color:var(--orange)}
+body.m-halloween .modes button{color:var(--orange)}
+body.m-halloween .modes button.on{background:var(--orange);color:#1d1226}
+.tags{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.tags span{font:500 11.5px var(--mono);padding:2px 9px;border:1px solid #ffffff2e;border-radius:20px;color:#cfc7e2}
+
+/* sections */
+.sec{padding:84px 0;border-bottom:1px solid var(--line)}
+.sh{margin-bottom:30px}
+.sh .k{font:400 12.5px var(--type);letter-spacing:.24em;color:var(--orange)}
+.sh h2{font:700 clamp(26px,3.6vw,36px)/1.25 var(--batang);color:var(--cream);margin-top:6px}
+.sh p{font:400 14.5px/1.8 var(--sans);color:#b9b0d0;margin-top:8px;max-width:640px}
+@media(max-width:700px){.sec{padding:60px 0}}
+
+/* case file */
+.paper{position:relative;background:var(--cream);color:var(--ink);padding:30px 30px 26px;background-image:repeating-linear-gradient(0deg,transparent 0 27px,rgba(47,74,53,.13) 27px 28px);box-shadow:0 10px 30px #0008;transform:rotate(-.3deg)}
+.paper .tape{position:absolute;top:-11px;width:96px;height:24px;background:rgba(232,220,170,.78);border:1px dashed rgba(0,0,0,.12)}
+.paper .tape.l{left:24px;transform:rotate(-5deg)}.paper .tape.r{right:24px;transform:rotate(4deg)}
+.paper h3{font:400 13px var(--type);letter-spacing:.18em;color:#a8483a}
+.paper p{font:400 16px/1.9 var(--batang);margin-top:10px}
+.paper p em{font-style:normal;background:#2f4a3522;padding:0 4px}
+.mcards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+.mc{border:1.5px solid var(--ink);padding:12px 14px;background:var(--cream2);box-shadow:2px 2px 0 #0003}
+.mc b{display:block;font:700 16px var(--sans)}
+.mc small{display:block;font:500 12px var(--mono);color:#7a6a4e;letter-spacing:.06em}
+.mc p{font:400 13.5px/1.7 var(--sans);margin-top:6px}
+.mc.hw{background:#2b1f3a;color:#f3e6d0;border-color:#2b1f3a}.mc.hw small{color:var(--lilac)}
+@media(max-width:640px){.mcards{grid-template-columns:1fr}.paper{padding:26px 18px 20px}}
+
+/* roster */
+.roster{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.pt{background:var(--night2);border:1px solid var(--line);border-radius:6px;padding:16px 14px 14px;position:relative;overflow:hidden}
+.pt::before{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:var(--green);opacity:.55}
+.pt::after{content:"";position:absolute;right:-6px;top:4px;width:70px;height:26px;background:linear-gradient(100deg,rgba(255,240,170,.35),transparent);clip-path:polygon(0 40%,100% 0,100% 100%);transform:rotate(18deg)}
+.pt .cs{font:400 20px var(--type);letter-spacing:.06em;color:var(--orange);position:relative}
+.pt .id{font:500 10.5px var(--mono);color:var(--muted);letter-spacing:.1em}
+.pt h4{font:700 16px var(--sans);color:var(--cream);margin-top:10px}
+.pt h4 small{display:block;font:500 11.5px var(--mono);color:var(--muted);font-weight:500}
+.pt p{font:400 13px/1.6 var(--sans);color:#c9c1dc;margin-top:6px}
+@media(max-width:900px){.roster{grid-template-columns:repeat(2,1fr)}.roster .pt:last-child{grid-column:1/-1}}
+
+/* try-it */
+.try{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:22px;align-items:start}
+.chat{background:#141320;border:1px solid var(--line);border-radius:8px;padding:18px 16px;min-height:420px}
+.chat .who{display:flex;align-items:center;gap:8px;font:500 12px var(--mono);color:var(--muted);margin-bottom:6px}
+.chat .who img{width:28px;height:28px;border-radius:50%}
+.msg{font:400 15px/1.85 var(--sans);color:#e7e2f0}
+.msg p{margin:0 0 12px}
+.msg .u{display:inline-block;font:500 12px/1.4 var(--mono);background:#ffffff1a;border-radius:3px;padding:0 5px;color:var(--cream)}
+.msg .note{display:block;margin:4px 0;padding:6px 10px;border-left:3px solid var(--orange);background:#ffffff0a;font-family:var(--batang)}
+.done{margin-top:10px;text-align:center;font:500 12px var(--mono);color:var(--muted)}
+.done button{margin-left:8px;border:1px solid #ffffff33;border-radius:3px;padding:2px 10px;color:var(--cream)}
+.tg{position:sticky;top:64px;background:var(--cream);color:var(--ink);border-radius:4px;padding:16px 16px 14px;box-shadow:0 8px 24px #0007;background-image:repeating-linear-gradient(0deg,transparent 0 27px,rgba(47,74,53,.13) 27px 28px)}
+.tg h4{font:400 13px var(--type);letter-spacing:.16em;color:#a8483a;margin-bottom:8px}
+.tg .k{font:500 12px var(--mono);color:#7a6a4e;margin:10px 0 4px}
+.tg .seg{display:flex;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden}
+.tg .seg button{flex:1;padding:5px 2px;font:500 12.5px var(--sans);border-left:1px solid var(--ink)}
+.tg .seg button:first-child{border-left:0}
+.tg .seg button.on{background:var(--green);color:var(--cream)}
+.tg .seg.dis{opacity:.4;pointer-events:none}
+.tg p{font:400 12px/1.6 var(--sans);color:#6d5f47;margin-top:12px}
+@media(max-width:900px){.try{grid-template-columns:minmax(0,1fr)}.tg{position:static;order:-1}}
+
+/* big map */
+.bigmap .bad-map{max-width:none!important}
+
+/* radio legend */
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rgrid .cap{font:500 11.5px var(--mono);color:var(--muted);margin-top:6px;text-align:center}
+@media(max-width:860px){.rgrid{grid-template-columns:1fr}}
+
+footer{padding:40px 0 60px;text-align:center;font:500 12px var(--mono);color:var(--muted)}
+footer a{color:var(--cream);border-bottom:1px solid #ffffff44}
+
+/* side map */
+#side summary::-webkit-details-marker{display:none}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.badge img{animation:none}}
+
+/* ── bot styles (from module) ── */
+.bad-radio{max-width:560px;margin:10px auto;background:#23241f;color:#e9e4d2;border-radius:6px;border:2px solid #111;box-shadow:inset 0 0 0 1px #4a4a40,0 4px 12px rgba(0,0,0,.45);overflow:hidden}
+.br-head{display:flex;align-items:center;gap:8px;padding:5px 10px;background:repeating-linear-gradient(90deg,#2d2e28 0 3px,#26271f 3px 6px);border-bottom:1px solid #111;font-family:'Special Elite','Courier New',monospace;font-size:12px;letter-spacing:.1em}
+.br-led{flex:none;width:9px;height:9px;border-radius:50%;background:#e8b52a;box-shadow:0 0 6px #e8b52a}
+.br-cs{color:#e8c66a}
+.br-sig{margin-left:auto;color:#8f8a76;font-size:10.5px;text-transform:uppercase}
+.br-body{padding:8px 12px 10px;line-height:1.6;font-family:'IBM Plex Sans KR',sans-serif;font-size:15px}
+.bad-radio.sig-clear .br-led{background:#7bd36b;box-shadow:0 0 6px #7bd36b}
+.bad-radio.sig-static .br-body{background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px)}
+.bad-radio.sig-static .br-led{animation:badFlicker .9s steps(2) infinite}
+.bad-radio.sig-cut{border-color:#5a1d16}
+.bad-radio.sig-cut .br-led{background:#c0392b;box-shadow:0 0 6px #c0392b}
+.bad-radio.sig-cut .br-body:after{content:" ▌";color:#c0392b}
+@keyframes badFlicker{50%{opacity:.25}}
+.bad-radio.m-halloween{background:#241a2e;border-color:#0e0814}
+.bad-radio.m-halloween .br-cs{color:#f0a060}
+.radio-text{margin:0 0 12px}
+.sel{--paper:#efe6cc;--paper2:#e4d7b4;--ink:#2b2418;--green:#2f4a35;--accent:#a8483a;--muted:#7a6a4e;position:relative;max-width:640px;margin:8px auto 18px;padding:22px 18px 16px;
+  background:var(--paper);background-image:repeating-linear-gradient(0deg,transparent 0 27px,rgba(47,74,53,.13) 27px 28px);color:var(--ink);
+  font-family:'IBM Plex Sans KR',sans-serif;border:1px solid rgba(0,0,0,.25);box-shadow:0 2px 0 rgba(0,0,0,.15),0 10px 26px rgba(0,0,0,.45)}
+.sel.m-halloween{--paper:#2b1f3a;--paper2:#3a2a4f;--ink:#f3e6d0;--green:#e8742a;--accent:#e8742a;--muted:#b9a3d6;background-image:repeating-linear-gradient(0deg,transparent 0 27px,rgba(232,116,42,.12) 27px 28px)}
+.sel *{box-sizing:border-box}
+.sel-tape{position:absolute;top:-10px;width:92px;height:24px;background:rgba(232,220,170,.75);border:1px dashed rgba(0,0,0,.12)}
+.sel-tape.l{left:18px;transform:rotate(-6deg)} .sel-tape.r{right:18px;transform:rotate(5deg)}
+.sel.m-halloween .sel-tape{background:rgba(232,116,42,.55)}
+.sel-title{font-family:'Special Elite','Courier New',monospace;font-size:22px;letter-spacing:.06em;line-height:1.05;color:var(--green);overflow-wrap:anywhere}
+.sel-sub{font-family:'Special Elite','Courier New',monospace;font-size:11.5px;letter-spacing:.14em;color:var(--muted)}
+.sel-lead{font-family:'Gowun Batang',serif;font-size:15.5px;line-height:1.65;margin:10px 2px 12px}
+.sel-map{margin:10px 0;border:6px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.35);line-height:0}
+.sel-img{aspect-ratio:16/9;width:100%;background-color:#201d28;background-size:cover;background-position:center}
+.sel-step{margin:14px 0 6px;font-family:'IBM Plex Mono','IBM Plex Sans KR',monospace;font-weight:500;font-size:12.5px;letter-spacing:.12em;color:var(--accent)}
+.sel-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(140px,100%),1fr));gap:8px}
+.sel-row.kids{grid-template-columns:repeat(auto-fit,minmax(96px,1fr))}
+.sel .opt{display:block;width:100%;text-align:left;cursor:pointer;padding:10px 12px;border:1.5px solid var(--ink);border-radius:3px;background:var(--paper2);color:var(--ink);font-family:inherit;font-size:14px;line-height:1.35;box-shadow:2px 2px 0 rgba(0,0,0,.25)}
+.sel .opt b{display:block;font-family:'IBM Plex Sans KR',sans-serif;font-size:16px;font-weight:700;line-height:1.25}
+.sel .opt small{display:block;opacity:.75;font-size:12px;margin-top:3px;font-weight:400}
+.sel .opt.on{background:var(--green);color:var(--paper);border-color:var(--green)}
+.sel.m-halloween .opt.on{color:#1d1226}
+.sel-actions{margin-top:16px}
+.sel-foot{margin-top:4px;margin-bottom:10px;font-size:11.5px;color:var(--muted);text-align:center;font-family:'Special Elite','Courier New',monospace;letter-spacing:.06em}
+@media (max-width:500px){.sel{padding:20px 12px 14px}.sel-title{font-size:19px}}
+.bad-map details>summary::-webkit-details-marker{display:none}
+.bad-map details .bm-place-name{display:none}
+.bad-map details[open] .bm-place-name{display:block}
+@media(hover:hover){.bad-map details:hover .bm-place-name{display:block}}
+</style>
+<script>
+/* ── KO / EN ── 한국어 원문은 HTML에 그대로 두고, 영어는 아래 사전에서 바꿔 끼워요. 문구를 고치면 사전의 같은 줄도 고쳐주세요. */
+const I18N={"뱅고어 애프터 다크": "Bangor After Dark", "동네 괴담을 수집하는 중학교 향토사 동아리. 무전기를 챙기고, 해가 지기 전에 돌아올 것.": "A middle school history club collecting neighborhood legends. Bring your radio. Be home before dark.", "라이트 호러": "Light horror", "미스터리": "Mystery", "성장물": "Coming-of-age", "앙상블": "Ensemble", "우리 동네에서 절대 하면 안 되는 일": "Things You Should Never Do in Our Neighborhood", "1987년 가을, 메인주 뱅고어. 브라이어우드 중학교 향토사 동아리의 다섯 아이는 스스로를": "Autumn 1987, Bangor, Maine. The five children of the Briarwood Middle School Local History Club call themselves", "나이트 시프트": "Night Shift", "라고 부른다. 할로윈 특집 책자 『우리 동네에서 절대 하면 안 되는 일』을 만들기 위해 동네 목격담을 모으는 중이다.": ". They are collecting local sightings for a Halloween booklet: Things You Should Never Do in Our Neighborhood.", "학교 제보함에는 분실물 항의부터 설명할 수 없는 만남까지 온갖 쪽지가 들어온다. 그리고 동네에서 가장 우스운 금기 몇 개는, 진짜 존재를 가리키고 있었다.": "The school tip box collects everything from lost-property complaints to inexplicable encounters. And some of the neighborhood's silliest prohibitions turn out to describe real beings.", "일상 모드": "Everyday Mode", "할로윈 모드": "Halloween Mode", "블랙 먼데이 다음 날. 학교, 동아리 활동, 가족과 이웃이 먼저이고, 기묘한 일은 배경에 머문다.": "The day after Black Monday. School, club projects, family, and neighbors come first; the uncanny stays in the background.", "축제와 책자 준비로 목격담이 늘어나고, 10월 31일이 다가올수록 사건이 움직이기 시작한다.": "The festival and the booklet bring more sightings, and incidents start moving as October 31 approaches.", "EVERYDAY · 1987.10.20 (화)": "EVERYDAY · OCT 20, 1987 (TUE)", "HALLOWEEN · 1987.10.24 (토)": "HALLOWEEN · OCT 24, 1987 (SAT)", "나이트 시프트 부원": "The Night Shift", "열두 살에서 열네 살. 숙제, 허락서, 용돈, 통금, 태워줄 어른이 늘 계획을 가로막는다. 무전기 호출부호는 정해져 있다.": "Ages twelve to fourteen. Homework, permission slips, allowance, curfews, and rides always get in the way. Every walkie-talkie has a callsign.", "네이트 파이크": "Nate Pike", "베스 머서": "Beth Mercer", "제이미 브룩스": "Jamie Brooks", "아이리스 벨": "Iris Bell", "오웬 레예스": "Owen Reyes", "13 · 8학년": "13 · 8th grade", "12 · 7학년": "12 · 7th grade", "14 · 8학년": "14 · 8th grade", "동아리 회장. 인터뷰를 짜고 계획을 세운다.": "Club president. Organizes interviews and makes the plans.", "장비·무전 담당. 개조 라디오 '크리퍼 미터'의 주인.": "Equipment and radio. Owner of the modified 'Creeper Meter'.", "민담 수집과 녹음 담당.": "Folklore collector and sound recorder.", "기록, 사진, 지도 담당.": "Documents, photographs, and maps.", "동네 탐문과 현장 지원 담당.": "Neighborhood interviews and field support.", "퍼스트 메시지 선택기": "First-message selector", "언어와 모드, 관계를 고르고 오프닝을 미리 본 뒤 확정합니다. 오른쪽 토글로 지도와 무전 표시 방식을 바꿔볼 수 있습니다.": "Pick a language, mode, and relationship, preview the opening, then confirm it. Use the toggles to change how the map and radio are displayed.", "동아리의 종이 지도": "The club's paper map", "응답마다 맨 아래에 지도 기록이 붙습니다. 위치에 마우스를 올리거나 누르면 장소 이름이 보이고, 같은 위치의 기록은 핀 하나로 묶입니다. 아래는 예시 기록입니다.": "Every response ends with a map record. Hover or tap a location to see its name; records at the same place share one pin. The records below are examples.", "무전 카드": "Radio cards", "들리는 대로만 표시됩니다. 수신 상태는 맑음 · 잡음 · 끊김 세 가지이고, 목소리의 주인은 확인된 사람만 이름이 붙습니다.": "Only what can be heard is shown. Reception is clear, static, or cut, and a voice is named only once its owner is known."};
+const I18N_KEYS=Object.keys(I18N).filter(k=>k.length>1).sort((a,b)=>b.length-a.length);
+let LANG=(()=>{const q=new URLSearchParams(location.search).get('lang');if(q==='ko'||q==='en')return q;try{const s=localStorage.getItem('shk_lang');if(s)return s}catch(e){}return (navigator.language||'ko').toLowerCase().startsWith('ko')?'ko':'en'})();
+const I18N_ORIG=new WeakMap();
+function i18nText(t){if(!I18N_ORIG.has(t))I18N_ORIG.set(t,t.nodeValue);const o=I18N_ORIG.get(t);let v=o;
+  if(LANG==='en'&&/[가-힣]/.test(o)){const k=o.trim();if(k in I18N)v=o.replace(k,I18N[k]);else{for(const kk of I18N_KEYS)if(v.includes(kk))v=v.split(kk).join(I18N[kk])}}
+  if(t.nodeValue!==v)t.nodeValue=v}
+function i18nAll(root){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentElement;return p&&(/^(SCRIPT|STYLE)$/.test(p.tagName)||p.closest('[data-noi18n]'))?2:1}});let n;while(n=w.nextNode())i18nText(n)}
+function setLang(l){LANG=l;try{localStorage.setItem('shk_lang',l)}catch(e){}document.documentElement.lang=l;document.documentElement.dataset.lang=l;i18nAll(document.body);
+  document.querySelectorAll('.lgsw button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));if(window.onLangChange)onLangChange()}
+const I18N_SKIP=n=>{const e=n.nodeType===1?n:n.parentElement;return !e||/^(SCRIPT|STYLE)$/.test(e.tagName)||!!e.closest('[data-noi18n]')};
+new MutationObserver(ms=>{for(const m of ms)m.addedNodes.forEach(n=>{if(I18N_SKIP(n))return;if(n.nodeType===3)i18nText(n);else if(n.nodeType===1)i18nAll(n)})}).observe(document.documentElement,{subtree:true,childList:true});
+document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.lgsw button').forEach(b=>b.onclick=()=>setLang(b.dataset.l));setLang(LANG)});
+</script>
+</head>
+<body class="m-everyday">
+
+<header class="bar"><div class="wrap">
+  <span class="lg"><img src="assets/badge.png" alt="">NIGHT SHIFT</span>
+  <nav><a href="#case">CASE FILE</a><a href="#club">CLUB</a><a href="#try">OPENING</a><a href="#map">FIELD MAP</a><a href="#radio">RADIO</a></nav>
+  <a class="bk" href="../">← ARCHIVE</a>
+  <div class="lgsw"><button data-l="ko">KO</button><button data-l="en">EN</button></div>
+</div></header>
+
+<section class="hero">
+  <div class="bgm" style="background-image:url(assets/map_1987.webp)"></div>
+  <div class="bgm hw" style="background-image:url(assets/map_halloween.webp)"></div>
+  <div class="in">
+    <div class="badge"><img src="assets/badge.png" alt="Night Shift"></div>
+    <h1><span>BANGOR</span><b>AFTER DARK</b></h1>
+    <div class="sub">NIGHT SHIFT · MAINE · 1987</div>
+    <div class="ko">뱅고어 애프터 다크</div>
+    <p class="lead">동네 괴담을 수집하는 중학교 향토사 동아리. 무전기를 챙기고, 해가 지기 전에 돌아올 것.</p>
+    <div class="modes" id="heroModes"><button data-m="everyday">EVERYDAY<small>1987.10.20</small></button><button data-m="halloween">HALLOWEEN<small>1987.10.24</small></button></div>
+    <div class="tags"><span>라이트 호러</span><span>미스터리</span><span>성장물</span><span>앙상블</span><span>1987</span></div>
+  </div>
+</section>
+
+<section class="sec" id="case"><div class="wrap">
+  <div class="sh rv"><div class="k">CASE FILE · 01</div><h2>우리 동네에서 절대 하면 안 되는 일</h2></div>
+  <div class="paper rv">
+    <i class="tape l"></i><i class="tape r"></i>
+    <h3>BRIARWOOD MIDDLE SCHOOL · LOCAL HISTORY CLUB</h3>
+    <p>1987년 가을, 메인주 뱅고어. 브라이어우드 중학교 향토사 동아리의 다섯 아이는 스스로를 <em>나이트 시프트</em>라고 부른다. 할로윈 특집 책자 『우리 동네에서 절대 하면 안 되는 일』을 만들기 위해 동네 목격담을 모으는 중이다.</p>
+    <p>학교 제보함에는 분실물 항의부터 설명할 수 없는 만남까지 온갖 쪽지가 들어온다. 그리고 동네에서 가장 우스운 금기 몇 개는, 진짜 존재를 가리키고 있었다.</p>
+    <div class="mcards">
+      <div class="mc"><small>EVERYDAY · 1987.10.20 (화)</small><b>일상 모드</b><p>블랙 먼데이 다음 날. 학교, 동아리 활동, 가족과 이웃이 먼저이고, 기묘한 일은 배경에 머문다.</p></div>
+      <div class="mc hw"><small>HALLOWEEN · 1987.10.24 (토)</small><b>할로윈 모드</b><p>축제와 책자 준비로 목격담이 늘어나고, 10월 31일이 다가올수록 사건이 움직이기 시작한다.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec" id="club"><div class="wrap">
+  <div class="sh rv"><div class="k">NIGHT SHIFT · ROSTER</div><h2>나이트 시프트 부원</h2><p>열두 살에서 열네 살. 숙제, 허락서, 용돈, 통금, 태워줄 어른이 늘 계획을 가로막는다. 무전기 호출부호는 정해져 있다.</p></div>
+  <div class="roster rv">
+    <div class="pt"><div class="id">C01</div><div class="cs">CAPTAIN</div><h4>네이트 파이크<small>13 · 8학년</small></h4><p>동아리 회장. 인터뷰를 짜고 계획을 세운다.</p></div>
+    <div class="pt"><div class="id">C02</div><div class="cs">SPARK</div><h4>베스 머서<small>13 · 8학년</small></h4><p>장비·무전 담당. 개조 라디오 '크리퍼 미터'의 주인.</p></div>
+    <div class="pt"><div class="id">C03</div><div class="cs">SPOOK</div><h4>제이미 브룩스<small>12 · 7학년</small></h4><p>민담 수집과 녹음 담당.</p></div>
+    <div class="pt"><div class="id">C04</div><div class="cs">ATLAS</div><h4>아이리스 벨<small>14 · 8학년</small></h4><p>기록, 사진, 지도 담당.</p></div>
+    <div class="pt"><div class="id">C05</div><div class="cs">SCOUT</div><h4>오웬 레예스<small>13 · 8학년</small></h4><p>동네 탐문과 현장 지원 담당.</p></div>
+  </div>
+</div></section>
+
+<section class="sec" id="try"><div class="wrap">
+  <div class="sh rv"><div class="k">OPENING · FIRST MESSAGE</div><h2>퍼스트 메시지 선택기</h2><p>언어와 모드, 관계를 고르고 오프닝을 미리 본 뒤 확정합니다. 오른쪽 토글로 지도와 무전 표시 방식을 바꿔볼 수 있습니다.</p></div>
+  <div class="try rv">
+    <div class="chat" data-noi18n>
+      <div class="who"><img src="assets/badge.png" alt="">Bangor After Dark</div>
+      <div id="selOut"></div>
+    </div>
+    <aside class="tg" id="tg" data-noi18n></aside>
+  </div>
+</div></section>
+
+<section class="sec" id="map"><div class="wrap">
+  <div class="sh rv"><div class="k">FIELD MAP</div><h2>동아리의 종이 지도</h2><p>응답마다 맨 아래에 지도 기록이 붙습니다. 위치에 마우스를 올리거나 누르면 장소 이름이 보이고, 같은 위치의 기록은 핀 하나로 묶입니다. 아래는 예시 기록입니다.</p></div>
+  <div class="bigmap rv" id="bigMap" data-noi18n></div>
+</div></section>
+
+<section class="sec" id="radio"><div class="wrap">
+  <div class="sh rv"><div class="k">WALKIE-TALKIE</div><h2>무전 카드</h2><p>들리는 대로만 표시됩니다. 수신 상태는 맑음 · 잡음 · 끊김 세 가지이고, 목소리의 주인은 확인된 사람만 이름이 붙습니다.</p></div>
+  <div class="rgrid rv" id="radioDemo" data-noi18n></div>
+</div></section>
+
+<footer><a href="../">← ARCHIVE</a></footer>
+
+<details id="side" data-noi18n style="display:none"></details>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const OPEN={"ko_everyday_student": "1987년 10월 20일 화요일, 오후 3시 40분.\n\n브라이어우드 중학교 구관 2층 끝. 문패 대신 '향토사 동아리'라고 쓴 마분지가 테이프로 붙어 있는 기록실이다. 접이식 테이블 위에 수동 타자기와 반쯤 빈 콜라 캔이 놓여 있고, 코르크보드에는 사진과 신문 스크랩이 빼곡하다. 창밖으로 단풍 든 운동장과 자전거 거치대가 내려다보였다.\n\n\"자, 주목.\" 네이트가 의자에 한쪽 무릎을 올리고 제보함을 흔들었다. \"할로윈 특집호 첫 기사 정했어.\"\n\"정한 게 아니라 네가 정한 거겠지.\" 베스는 고개도 들지 않고 납땜인두를 내려놓았다. 테이블 끝에서 그녀가 '크리퍼 미터'라고 부르는 개조 라디오가 낮게 지직거렸다.\n\n네이트가 꺼낸 건 공책을 찢어 쓴 쪽지였다. 연필 글씨가 삐뚤빼뚤했다.\n『빈집 골목 끝, 작년에 헐린 집. 밤마다 초인종이 울려요. 집이 없는데.』\n\n\"집이 없는데 초인종이 울린대.\" 제이미가 안경을 밀어 올리며 속삭였다. \"이건 무조건 1면이야.\"\n\"출처는?\" 아이리스가 카메라 렌즈 뚜껑을 만지작거렸다. \"이름도 날짜도 없잖아.\"\n\"그러니까 가서 확인해야지.\" 네이트가 손가락을 하나씩 접었다. \"토요일 낮에 가서 사진 찍고, 동네 사람 인터뷰하고, 해 지기 전에 돌아온다. 돌아오는 길까지 계획에 있어.\"\n오웬이 손목시계를 흘끗 봤다. \"그 동네 버스 끊기는 시간도 계획에 있냐?\"\n\n그때 기록실 문이 삐걱 열렸다. 다섯 개의 시선이 동시에 {{user}}에게 꽂혔다.\n\n<ns-map date=\"1987-10-20 (화)\" time=\"오후 3:40\" loc=\"SCHOOL\">\n<pin who=\"RUMOR\" at=\"EMPTY_HOUSES\" kind=\"unconfirmed\">헐린 집 초인종<\/pin>\n<\/ns-map>", "ko_everyday_advisor": "1987년 10월 20일 화요일, 오후 3시 25분.\n\n\"이게 그 열쇠예요.\" 루스 휘태커가 빨간 스테이션왜건 트렁크에서 상자를 내리다 말고, 놋쇠 열쇠 꾸러미를 {{user}}의 손바닥에 떨어뜨렸다. \"구관 기록실, 비품장, 그리고… 이건 저도 뭔지 몰라요. 전임자가 남긴 거라.\"\n\n향토사 동아리 지도교사 자리는 생각보다 소박했다. 예산 서류 한 장, 다음 학기 존속 여부를 검토하겠다는 교무실 메모 한 장, 그리고 꼬깃꼬깃한 항의 편지 한 통.\n\n루스가 편지를 펼쳐 보였다. 굵고 성난 필체였다.\n『귀교 학생들의 자전거가 본인의 화단을 세 번째로 짓밟았음. 피해 목록 첨부. — G. 핀치』\n\"핀치 씨예요. 피해 목록이 진짜로 첨부돼 있어요. 금잔화 열두 포기.\" 루스가 안경을 밀어 올렸다. \"그런데 애들 말로는 그 집에서 밤마다 웃음소리가 들린대요. 기계 같은 웃음소리.\"\n\n구관 복도 끝에서 타자기 소리와 말다툼이 새어 나왔다. \"그건 아직 테스트 중이라고!\" 베스의 목소리였다. \"그러니까 실전 테스트를 하자는 거잖아.\" 네이트가 받아쳤다.\n\n루스가 어깨를 으쓱했다. \"소개할게요. 우리 동네 역사를 기록하는 아주 성실한 다섯 명이에요. 대부분의 시간엔요.\"\n\n<ns-map date=\"1987-10-20 (화)\" time=\"오후 3:25\" loc=\"SCHOOL\">\n<pin who=\"RUMOR\" at=\"FINCH_HOME\" kind=\"unconfirmed\">밤마다 기계 웃음소리<\/pin>\n<\/ns-map>", "ko_everyday_family": "1987년 10월 20일 화요일, 오후 5시 30분.\n\n브라이어우드 중학교 주차장에 들어섰을 때, 해는 벌써 강 쪽으로 기울고 있었다. 구관 2층 끝 창문 하나에만 아직 불이 켜져 있다. 향토사 동아리 기록실. {{getvar::bad_child_name}}{{getvar::bad_child_ga}} \"딱 30분만\"이라고 한 게 두 시간 전이었다.\n\n계단을 올라가자 문틈으로 아이들 목소리가 한꺼번에 쏟아졌다.\n\"반납함에 라벨 없는 테이프가 들어왔대. 칼 아저씨가 그랬어. 오르페움 옛날 상영관이 찍혀 있대!\"\n\"그 상영관은 1954년부터 봉쇄됐어. 찍을 수가 없어.\"\n\"그러니까 이상하다는 거지!\"\n\n문을 열자 소리가 뚝 끊겼다. {{getvar::bad_child_name}}{{getvar::bad_child_ga}} 가장 먼저 {{user}}를 알아보고, 아주 짧게 '망했다'는 얼굴을 했다가 재빨리 웃었다.\n\"…왔어? 저기, 혹시 가는 길에 리와인드 비디오 잠깐만 들르면 안 돼? 진짜 잠깐. 숙제야. 향토사 숙제.\"\n\n뒤에서 나머지 아이들이 일제히 고개를 끄덕였다. 너무 열심히.\n\n<ns-map date=\"1987-10-20 (화)\" time=\"오후 5:30\" loc=\"SCHOOL\">\n<pin who=\"RUMOR\" at=\"VIDEO\" kind=\"unconfirmed\">라벨 없는 테이프<\/pin>\n<\/ns-map>", "ko_halloween_student": "1987년 10월 24일 토요일, 오후 4시 50분. 할로윈까지 일주일.\n\n브라이어우드 그린에는 축제 천막이 벌써 반쯤 세워져 있었다. 주황색 종이 등불과 건초더미 사이로, 누군가 너무 일찍 불을 켠 잭오랜턴이 웃고 있다. 동아리는 공원 구석의 접이식 테이블 하나를 겨우 따냈다. 테이블에는 손글씨 간판이 붙어 있었다.\n『우리 동네에서 절대 하면 안 되는 일 — 할로윈 특집호 예약 판매』\n\n\"예약 판매라니, 아직 한 쪽도 안 찍었잖아.\" 아이리스가 간판을 보고 한숨을 쉬었다.\n\"그러니까 예약이지.\" 네이트가 태연하게 말했다.\n\n공원 반대편에서 고함이 터졌다. 빛바랜 크림색 광대 의상에 축 처진 눈썹을 그린 거구의 남자, 핀치 씨가 스프링 달린 해골 소품을 끌어안고 오웬을 노려보고 있었다. \"그건 내 거다! 빌려준 게 아니라 '보여준' 거야!\"\n오웬이 두 손을 들었다. \"옮겨드리려던 거예요, 진짜로.\"\n\n그때 테이블 위 무전기가 지직거렸다.\n<ns-radio who=\"C02\" signal=\"static\">스파크다. 학교 기록실. 제보함에 새 쪽지가 세 장 들어왔어. 하나는… 너희가 직접 봐야 돼.<\/ns-radio>\n<ns-radio who=\"C03\" signal=\"clear\">스푸크. 무서운 거야, 진짜 무서운 거야?<\/ns-radio>\n<ns-radio who=\"C02\" signal=\"static\">\"오르페움 뒷줄에 앉으면 영화가 끝나도 못 나간다.\" 근데 이거… 잉크가 아직 안 말랐어.<\/ns-radio>\n\n제이미가 무전기를 내려놓고 천천히 {{user}}를 돌아보았다.\n\n<ns-map date=\"1987-10-24 (토)\" time=\"오후 4:50\" loc=\"FAIRGROUND\">\n<pin who=\"C02\" at=\"SCHOOL\" kind=\"reported\">기록실, 제보함 확인 중<\/pin>\n<pin who=\"RUMOR\" at=\"THEATER\" kind=\"unconfirmed\">뒷줄 관객은 못 나간다<\/pin>\n<\/ns-map>", "ko_halloween_advisor": "1987년 10월 24일 토요일, 오후 6시 10분. 할로윈까지 일주일.\n\n해가 지자 브라이어우드 그린의 종이 등불이 하나씩 켜졌다. 지도교사로서 {{user}}가 맡은 일은 단순했다. 동아리 부스를 지키고, 여덟 시 전에 아이들을 각자 집에 돌려보내는 것.\n단순한 일은 대개 단순하게 끝나지 않는다.\n\n\"선생님, 이건 정식 제보예요.\" 네이트가 접힌 쪽지를 내밀었다. 부스 뒤에서 커피를 마시던 루스 휘태커가 고개를 저었다. \"일단 들어보죠. 아무도 울타리부터 넘지는 말고요.\"\n\n그때 낡은 세단 한 대가 공원 앞에 급정거했다. 운전석에서 내린 건 밤색 머리를 높이 묶은 여자애였다. 웨스트브리지 응원단 점퍼, 바네사 레예스.\n\"오웬. 차에 타. 지금.\" 그녀는 {{user}}를 발견하고 미소를 조금 고쳐 지었다. \"아, 선생님. 실례해요. 엄마가 데려오래서요. 저 파티에 늦었거든요.\"\n\"누나 친구 파티는 아홉 시부터잖아.\" 오웬이 중얼거렸다.\n\"늦은 거 맞아. 그리고 그 얘기 하지 마.\" 바네사는 립글로스를 확인하다 말고 잠깐 멈칫했다. \"…웃긴 얘기 하나 해줄까. 내 친구 하나가 오늘 아침에, 내가 어젯밤 혼자 방에서 한 말을 그대로 따라 했어. 방에 아무도 없었는데.\"\n그러고는 곧바로 코웃음을 쳤다. \"됐어. 너네 유령 클럽한테 소재 주려는 거 아니야.\"\n\n다섯 아이의 눈이 동시에 반짝였다.\n\n<ns-map date=\"1987-10-24 (토)\" time=\"오후 6:10\" loc=\"FAIRGROUND\">\n<pin who=\"RUMOR\" at=\"REYES_HOME\" kind=\"unconfirmed\">친구가 혼잣말을 안다<\/pin>\n<\/ns-map>", "ko_halloween_family": "1987년 10월 24일 토요일, 오후 7시 5분. 할로윈까지 일주일.\n\n{{getvar::bad_child_home_name}} 부엌. 창밖으로 길 건너 집 현관마다 잭오랜턴이 하나씩 켜져 있다. 식탁 위에는 식어가는 저녁 한 접시와, {{getvar::bad_child_name}}{{getvar::bad_child_ga}} 아침에 두고 간 쪽지가 있었다.\n『동아리 축제 준비. 그린에 있음. 8시까지 들어옴. 진짜로.』\n쪽지 옆에는 동아리 무전기 한 대가 놓여 있다. \"비상용\"이라며 억지로 쥐여준 것이었다.\n\n여덟 시까지 55분. 무전기가 지직거렸다.\n<ns-radio who=\"{{getvar::bad_child}}\" signal=\"static\">…들려요? 여기 그린인데요. 진짜 금방 들어가요. 근데 혹시… 지금 집 앞에 누구 있어요?<\/ns-radio>\n\n창밖 현관 계단은 비어 있었다. 잭오랜턴 하나만 웃고 있을 뿐이었다. 켠 기억이 없는.\n\n<ns-map date=\"1987-10-24 (토)\" time=\"오후 7:05\" loc=\"{{getvar::bad_child_home}}\">\n<pin who=\"{{getvar::bad_child}}\" at=\"FAIRGROUND\" kind=\"reported\">8시까지 귀가 약속<\/pin>\n<\/ns-map>", "en_everyday_student": "Tuesday, October 20, 1987. 3:40 p.m.\n\nAt the far end of Briarwood Middle School's old second-floor corridor, a piece of cardboard taped to a door reads LOCAL HISTORY CLUB. Inside the records room, a manual typewriter and a half-empty Coke sit on a folding table. Photographs and newspaper clippings crowd the corkboard. Beyond the window lie an autumn-colored schoolyard and the bicycle racks.\n\n\"Okay, listen up.\" Nate plants one knee on a chair and rattles the tip box. \"I've picked our Halloween lead story.\"\n\"You picked it,\" Beth says, setting down her soldering iron without looking up. Her modified radio—the Creeper Meter—crackles at the end of the table.\n\nThe note Nate unfolds is torn from a school notebook. Its pencil lettering is uneven.\n'The house at the end of Empty House Lane. They tore it down last year. The doorbell still rings every night. There isn't a house anymore.'\n\n\"A doorbell with no house,\" Jamie whispers, pushing up his glasses. \"That's front-page material.\"\n\"Who's the source?\" Iris turns her camera's lens cap between her fingers. \"No name. No date.\"\n\"That's why we check.\" Nate counts on his fingers. \"Saturday afternoon. Photographs, interviews, home before dark. The plan includes getting back.\"\nOwen checks his wristwatch. \"Does it include the last bus?\"\n\nThe records-room door creaks open. All five look toward {{user}}.\n\n<ns-map date=\"1987-10-20 (Tue)\" time=\"3:40 PM\" loc=\"SCHOOL\">\n<pin who=\"RUMOR\" at=\"EMPTY_HOUSES\" kind=\"unconfirmed\">Doorbell, no house<\/pin>\n<\/ns-map>", "en_everyday_advisor": "Tuesday, October 20, 1987. 3:25 p.m.\n\n\"These are yours.\" Ruth Whitaker pauses while unloading a box from her red station wagon and offers {{user}} a ring of brass keys. \"Old-wing records room, supply cupboard, and... I don't know what this one opens. My predecessor left it.\"\n\nThe local history club's advisory position comes with modest paperwork: one budget sheet, one memo about reviewing the club's future next term, and a thoroughly crumpled letter of complaint.\n\nRuth unfolds it. The handwriting is large and angry.\n'Your students' bicycles have flattened my flowerbed for the third time. An itemized list of damages is enclosed. — G. Finch'\n\"Mr. Finch. There really is a list. Twelve marigolds.\" She adjusts her glasses. \"The children say they hear laughter from his place at night. Mechanical laughter.\"\n\nTyping and an argument drift down the corridor.\n\"I said it's still in testing!\" Beth shouts.\n\"Exactly. Field testing,\" Nate answers.\n\nRuth shrugs. \"Let me introduce you. Five very conscientious young historians. Most of the time.\"\n\n<ns-map date=\"1987-10-20 (Tue)\" time=\"3:25 PM\" loc=\"SCHOOL\">\n<pin who=\"RUMOR\" at=\"FINCH_HOME\" kind=\"unconfirmed\">Mechanical laughter<\/pin>\n<\/ns-map>", "en_everyday_family": "Tuesday, October 20, 1987. 5:30 p.m.\n\nEvening is settling over Briarwood Middle School's parking lot. One window at the end of the old wing remains lit: the local history club's records room. {{getvar::bad_child_name_en}} asked for 'just half an hour' two hours ago.\n\nVoices spill through the door upstairs.\n\"An unmarked tape in the return slot! Cal said it shows the old auditorium at the Orpheum!\"\n\"They sealed that auditorium after the fire in 1954.\"\n\"Which is why it's weird!\"\n\nAs {{user}} arrives at the doorway, everyone goes quiet. {{getvar::bad_child_name_en}} looks briefly doomed, then tries a quick smile.\n\"...Hi. Could we stop at Rewind Video on the way home? Just for a minute. It's homework. Local history homework.\"\n\nThe other children nod behind them. Much too enthusiastically.\n\n<ns-map date=\"1987-10-20 (Tue)\" time=\"5:30 PM\" loc=\"SCHOOL\">\n<pin who=\"RUMOR\" at=\"VIDEO\" kind=\"unconfirmed\">An unmarked VHS<\/pin>\n<\/ns-map>", "en_halloween_student": "Saturday, October 24, 1987. 4:50 p.m. One week until Halloween.\n\nFestival tents stand half assembled on Briarwood Green. Between orange paper lanterns and hay bales, a jack-o'-lantern is already glowing. The club has secured one folding table in a corner of the park. A handwritten sign reads:\n'THINGS YOU SHOULD NEVER DO IN OUR NEIGHBORHOOD — HALLOWEEN EDITION. PREORDERS OPEN.'\n\n\"Preorders? We haven't printed a page,\" Iris says.\n\"That's what makes them preorders,\" Nate replies.\n\nA shout erupts across the green. Mr. Finch, enormous in his faded cream clown suit and painted drooping eyebrows, clutches a spring-loaded skeleton and glares at Owen.\n\"That's mine! I showed it to you. I didn't lend it to you!\"\nOwen raises both hands. \"I was helping you move it. Honest.\"\n\nThe radio on the table crackles.\n<ns-radio who=\"C02\" signal=\"static\">Spark here. School records room. Three new notes in the tip box. One of them... you need to see it.<\/ns-radio>\n<ns-radio who=\"C03\" signal=\"clear\">Spook. Scary, or actually scary?<\/ns-radio>\n<ns-radio who=\"C02\" signal=\"static\">'Sit in the Orpheum's back row and you won't leave when the movie ends.' And the ink... it's still wet.<\/ns-radio>\n\nJamie lowers his radio and slowly turns toward {{user}}.\n\n<ns-map date=\"1987-10-24 (Sat)\" time=\"4:50 PM\" loc=\"FAIRGROUND\">\n<pin who=\"C02\" at=\"SCHOOL\" kind=\"reported\">Checking the tip box<\/pin>\n<pin who=\"RUMOR\" at=\"THEATER\" kind=\"unconfirmed\">The trapped back row<\/pin>\n<\/ns-map>", "en_halloween_advisor": "Saturday, October 24, 1987. 6:10 p.m. One week until Halloween.\n\nAs darkness falls, the paper lanterns on Briarwood Green light up one by one. {{user}}'s duties as club advisor sound simple: supervise the booth and have the children heading home before eight.\nSimple duties have a way of becoming complicated.\n\n\"It's a proper report,\" Nate insists, offering a folded note. Ruth Whitaker looks up from her coffee behind the booth. \"Let's hear it before anyone starts climbing fences.\"\n\nAn old sedan pulls up abruptly beside the park. A young woman steps out, chestnut hair in a high ponytail, wearing a Westbridge cheerleading jacket: Vanessa Reyes.\n\"Owen. Car. Now.\" Spotting {{user}}, she adjusts her smile. \"Oh. Sorry. Mom sent me. I'm late for a party.\"\n\"Your friend's party starts at nine,\" Owen mutters.\n\"I'm still late. And don't start.\" Vanessa checks her lip gloss, then hesitates. \"Want to hear something funny? A friend repeated something I said alone in my bedroom last night. Word for word. Nobody was in there.\"\nShe immediately gives a dismissive little laugh. \"Forget it. I'm not feeding your ghost club.\"\n\nFive pairs of eyes brighten at once.\n\n<ns-map date=\"1987-10-24 (Sat)\" time=\"6:10 PM\" loc=\"FAIRGROUND\">\n<pin who=\"RUMOR\" at=\"REYES_HOME\" kind=\"unconfirmed\">Private words repeated<\/pin>\n<\/ns-map>", "en_halloween_family": "Saturday, October 24, 1987. 7:05 p.m. One week until Halloween.\n\nThe kitchen at {{getvar::bad_child_home_name_en}}. Jack-o'-lanterns glow on porches across the street. A plate of dinner is cooling beside a note {{getvar::bad_child_name_en}} left this morning.\n'Club festival setup. At the Green. Home by eight. Seriously.'\nBeside it sits a club walkie-talkie, pressed on {{user}} earlier 'for emergencies.'\n\nFifty-five minutes until eight. The radio crackles.\n<ns-radio who=\"{{getvar::bad_child}}\" signal=\"static\">...Can you hear me? We're at the Green. I'll be home soon. But, um... is somebody outside the house right now?<\/ns-radio>\n\nThe front steps beyond the window are empty. Only a jack-o'-lantern smiles back. No one mentioned lighting that one.\n\n<ns-map date=\"1987-10-24 (Sat)\" time=\"7:05 PM\" loc=\"{{getvar::bad_child_home}}\">\n<pin who=\"{{getvar::bad_child}}\" at=\"FAIRGROUND\" kind=\"reported\">Home by eight<\/pin>\n<\/ns-map>"};
+const IMGS=new Set(['opening_everyday','opening_halloween','opening_everyday_student','opening_everyday_advisor','opening_everyday_family_C02','opening_halloween_student','opening_halloween_advisor','opening_halloween_family']);
+const LOC={SCHOOL:[37.5,54.55,'브라이어우드 중학교','Briarwood Middle School'],HIGH_SCHOOL:[76.56,21.64,'웨스트브리지 고등학교','Westbridge High School'],ROWAN_SHOP:[56.56,49.55,'로완 잡화점',"Rowan’s General Store"],VIDEO:[62.81,49.82,'리와인드 비디오','Rewind Video'],THEATER:[65.31,40.73,'오르페움 극장','Orpheum Theater'],LIBRARY:[55.0,41.36,'브라이어우드 도서관','Briarwood Library'],DINER:[68.25,45.91,'레예스 다이너','Reyes Family Diner'],REYES_HOME:[68.25,45.91,'레예스네 아파트','Reyes Apartment'],FAIRGROUND:[49.44,46.55,'브라이어우드 그린','Briarwood Green'],GARAGE:[35.0,42.73,'파이크네 집·정비소','Pike House & Garage'],WORKSHOP:[31.25,58.18,'머서네 집·작업실','Mercer House & Workshop'],BROOKS_HOME:[40.62,69.09,'브룩스네 집','Brooks House'],BELL_HOME:[73.75,30.91,'벨네 집','Bell House'],FINCH_HOME:[27.5,71.82,'핀치네 집·소품 창고','Finch House & Prop Shed'],VALE_HOUSE:[32.5,79.09,'베일 저택','Vale House'],RIVER_STOP:[53.83,55.55,'강변 산책로','Riverside Walk'],RIVER_WOODS:[23.75,92.73,'블랙파인 숲','Black Pine Woods'],PUMP:[34.05,82.17,'옛 펌프하우스','Old Pump House'],LAB:[25.62,89.82,'폐쇄된 연구소','Closed Laboratory'],EMPTY_HOUSES:[91.88,13.64,'빈집 골목','Empty House Lane'],RELAY:[11.56,12.73,'모로 중계소','Morrow Relay Station'],AUTO:[34.6,70.45,'리버사이드 정비소','Riverside Auto'],POLICE:[60.31,39.09,'경찰서','Police Station'],HOSPITAL:[66.56,20.82,'지역 병원','Community Hospital'],ARCADE:[69.5,39.27,'하이스코어 오락실','High Score Arcade'],RINK:[45.31,61.36,'스타더스트 롤러장','Stardust Roller Rink']};
+const WHO={C01:['네이트','Nate'],C02:['베스','Beth'],C03:['제이미','Jamie'],C04:['아이리스','Iris'],C05:['오웬','Owen'],A01:['휘태커 선생님','Ms. Whitaker'],A02:['노라','Nora'],A03:['칼','Cal'],A04:['모랄레스 경관','Officer Morales'],A05:['메이','Mae'],A06:['월터','Walter'],A07:['핀치 씨','Mr. Finch'],A08:['딜런','Dylan'],A09:['바네사','Vanessa'],RUMOR:['소문','Rumor'],UNKNOWN:['알 수 없는 목소리','Unknown voice']};
+const CALL={C01:'CAPTAIN',C02:'SPARK',C03:'SPOOK',C04:'ATLAS',C05:'SCOUT'};
+const COLORS={last:'#3d5a8a',reported:'#7fa3c4',unconfirmed:'#8a6fb0',confirmed:'#e8742a',resolved:'#6f8c43'};
+const KINDS=[['last','마지막 목격','Last seen'],['reported','전해 들음','Reported'],['unconfirmed','미확인','Unconfirmed'],['confirmed','확인됨','Confirmed'],['resolved','해결','Resolved']];
+const CHILD={C01:['네이트','가','GARAGE','파이크네 집','Nate','the Pike house'],C02:['베스','가','WORKSHOP','머서네 집','Beth','the Mercer house'],C03:['제이미','가','BROOKS_HOME','브룩스네 집','Jamie','the Brooks house'],C04:['아이리스','가','BELL_HOME','벨네 집','Iris','the Bell house'],C05:['오웬','이','REYES_HOME','다이너 2층 레예스네 집','Owen','the Reyes apartment above the diner']};
+const S={lang:'ko',mode:'everyday',role:'student',child:'C01',picked:false,page:'1',stage:'select',map:'0',side:'0',radio:'0'};
+const en=()=>S.lang==='en',tr=(k,e)=>en()?e:k;
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const lname=k=>LOC[k]?(en()?LOC[k][3]:LOC[k][2]):k;
+const wname=k=>WHO[k]?(en()?WHO[k][1]:WHO[k][0]):k;
+
+/* ── field map (same layout logic as the bot) ── */
+function mapHTML(m,opt={}){
+  const hw=S.mode==='halloween';
+  const paper=hw?'#2b1f3a':'#efe6cc',ink=hw?'#f3e6d0':'#2b2418',muted=hw?'#b9a3d6':'#706046';
+  const out=[`<div class="bad-map" style="box-sizing:border-box;width:100%;max-width:680px;margin:0 auto;padding:10px;background:${paper};color:${ink};border:1px solid #71634d;font:13px/1.4 Georgia,serif;">`,
+  `<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;font:11px/1.4 monospace"><b>NIGHT SHIFT · FIELD MAP</b><span>${esc(m.date)} · ${esc(m.time)}</span></div>`,
+  `<div style="margin:6px 0;font-weight:bold">📍 ${esc(lname(m.loc))}</div>`,
+  `<div style="position:relative;line-height:0"><img alt="Bangor neighborhood map" src="assets/${hw?'map_halloween':'map_1987'}.webp" style="display:block;width:100%;height:auto;margin:0">`];
+  const groups={},order=[],rows=[];
+  const add=(at,who,kind)=>{const p=LOC[at];if(!p)return;const key=p[0]+':'+p[1];if(!groups[key]){groups[key]={x:p[0],y:p[1],names:[],kind,you:false};order.push(key)}const q=groups[key];if(who==='YOU')q.you=true;else q.names.push(wname(who))};
+  add(m.loc,'YOU','you');
+  m.pins.slice(0,8).forEach(([who,at,kind,note])=>{if(!LOC[at]||!COLORS[kind])return;add(at,who,kind);
+    rows.push(`<div style="padding:5px 0;border-bottom:1px dashed ${muted};line-height:1.4"><span style="color:${COLORS[kind]}">●</span> <b>${esc(wname(who))}</b> · ${esc(lname(at))}<br><span style="color:${muted};${kind==='resolved'?'text-decoration:line-through;':''}">${esc(note)}</span></div>`)});
+  order.forEach(key=>{const q=groups[key],n=q.names.length,color=q.you?'#c0392b':COLORS[q.kind]||'#666';
+    const label=q.you?(n>0?'YOU +'+n:'YOU'):(n>1?tr(n+'개 기록',n+' records'):q.names[0]);
+    out.push(`<div title="${esc(q.names.join(', '))}" style="position:absolute;left:${q.x}%;top:${q.y}%;width:16px;height:16px;transform:translate(-50%,-50%);z-index:${q.you?3:2};pointer-events:none;border:2px solid white;border-radius:50%;background:${color};box-sizing:border-box;box-shadow:0 1px 4px #000"><b style="position:absolute;left:50%;top:16px;transform:translateX(-50%);width:max-content;max-width:105px;padding:2px 4px;border-radius:3px;background:${paper};color:${ink};font:10px/1.2 sans-serif;text-align:center;box-shadow:0 1px 3px #000">${esc(label)}</b></div>`)});
+  // location name targets (diner + apartment share one target)
+  const tg={},tk=[];
+  Object.keys(LOC).forEach(k=>{const p=LOC[k],key=p[0]+':'+p[1];if(!tg[key]){tg[key]={x:p[0],y:p[1],names:[]};tk.push(key)}tg[key].names.push(lname(k))});
+  tk.forEach(key=>{const q=tg[key],label=esc(q.names.join(' / '));const h=q.x>70?'right:0;':q.x<25?'left:0;':'left:50%;transform:translateX(-50%);';const v=q.y>75?'bottom:26px;':'top:26px;';
+    out.push(`<details class="bm-place" style="position:absolute;left:${q.x}%;top:${q.y}%;width:22px;height:22px;transform:translate(-50%,-50%);z-index:4;line-height:1.3;"><summary title="${label}" aria-label="${label}" style="display:block;width:22px;height:22px;list-style:none;border-radius:50%;cursor:help;touch-action:manipulation;"></summary><span class="bm-place-name" style="position:absolute;${h}${v}width:max-content;max-width:150px;padding:6px 8px;background:${paper};color:${ink};border:1px solid ${ink};border-radius:4px;box-shadow:0 2px 8px #0008;font:12px/1.4 sans-serif;text-align:center;pointer-events:none;">${label}</span></details>`)});
+  out.push(`</div><div style="margin:7px 0 2px;color:${muted};font:11px/1.4 sans-serif">${tr('위치 위에 마우스를 올리거나 눌러 이름 확인 · 다시 누르면 닫힘','Hover or tap a location for its name · Tap again to close')}</div><div style="margin-top:8px">${rows.length?rows.join(''):tr('기록된 목격·소문 없음','No recorded sightings or rumors')}</div>`);
+  out.push(`<div style="display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:8px;font:11px/1.4 sans-serif;color:${muted}">`+KINDS.map(k=>`<span><b style="color:${COLORS[k[0]]}">●</b> ${tr(k[1],k[2])}</span>`).join('')+'</div></div>');
+  return out.join('');
+}
+function radioHTML(who,signal,body){
+  const cs=(CALL[who]?CALL[who]+' · ':'')+wname(who);
+  if(S.radio==='1')return `<p class="radio-text"><b>[${tr('무전','Radio')}] ${esc(cs)}:</b> ${esc(body)}</p>`;
+  return `<div class="bad-radio sig-${esc(signal)} m-${S.mode}"><div class="br-head"><span class="br-led"></span><span class="br-cs">${esc(cs)}</span><span class="br-sig">${esc(signal)}</span></div><div class="br-body">${esc(body)}</div></div>`;
+}
+
+/* ── opening selector ── */
+const btn=(fn,label,detail,active)=>`<button class="opt${active?' on':''}" data-fn="${fn}"><b>${label}</b>${detail?`<small>${detail}</small>`:''}</button>`;
+function selImage(){
+  const L=[];
+  if(S.page==='2'){if(S.role==='family'&&S.picked)L.push(`opening_${S.mode}_family_${S.child}`);L.push(`opening_${S.mode}_${S.role}`)}
+  L.push(`opening_${S.mode}`);
+  const urls=L.filter(n=>IMGS.has(n)).map(n=>`url('assets/${n}.webp')`);
+  return `<div class="sel-map"><div class="sel-img" style="background-image:${urls.join(',')}"></div></div>`;
+}
+function selector(){
+  const out=[`<div class="sel m-${S.mode}"><div class="sel-tape l"></div><div class="sel-tape r"></div>`,`<div class="sel-title">BANGOR AFTER DARK</div><div class="sel-sub">NIGHT SHIFT · BANGOR, MAINE · 1987</div>`,selImage()];
+  if(S.page!=='2'){
+    out.push(`<div class="sel-lead">${tr('동네 괴담을 수집하는 중학교 향토사 동아리. 무전기를 챙기고, 해가 지기 전에 돌아올 것.','A middle school history club collecting neighborhood legends. Bring your radio. Be home before dark.')}</div>`);
+    out.push(`<div class="sel-step">01 · ${tr('출력 언어','OUTPUT')}</div><div class="sel-row">${btn('lang_ko','한국어','',!en())}${btn('lang_en','English','',en())}</div>`);
+    out.push(`<div class="sel-step">02 · ${tr('모드','MODE')}</div><div class="sel-row">${btn('mode_everyday',tr('일상 모드','Everyday Mode'),tr('1987.10.20 (화)','Oct 20, 1987'),S.mode==='everyday')}${btn('mode_halloween',tr('할로윈 모드','Halloween Mode'),tr('1987.10.24 (토)','Oct 24, 1987'),S.mode==='halloween')}</div>`);
+    out.push(`<div class="sel-actions">${btn('next',tr('다음 →','Next →'),'',true)}</div></div>`);
+    return out.join('');
+  }
+  out.push(`<div class="sel-step">03 · ${tr('관계','RELATIONSHIP')}</div><div class="sel-row">${btn('role_student',tr('동아리 부원','Club member'),tr('다섯 아이와 함께하는 중학생','An additional middle school member'),S.role==='student')}${btn('role_advisor',tr('지도교사','Faculty advisor'),tr('동아리의 공식 지도교사','The club’s official faculty advisor'),S.role==='advisor')}${btn('role_family',tr('부원의 가족','Family member'),tr('아이의 가족 · 구체적인 관계는 직접','A child’s relative; you choose the relationship'),S.role==='family')}</div>`);
+  if(S.role==='family'){out.push(`<div class="sel-step">04 · ${tr('누구의 가족?','WHOSE FAMILY?')}</div><div class="sel-row kids">`+Object.keys(CHILD).map(c=>btn('child_'+c,en()?CHILD[c][4]:CHILD[c][0],'',S.child===c)).join('')+'</div>')}
+  out.push(`<div class="sel-actions sel-row">${btn('prev',tr('← 이전','← Back'),'',false)}${btn('preview',tr('오프닝 미리보기 →','Preview opening →'),'',true)}</div></div>`);
+  return out.join('');
+}
+function fillVars(t){const c=CHILD[S.child];
+  return t.replace(/\{\{getvar::bad_child_name_en\}\}/g,c[4]).replace(/\{\{getvar::bad_child_home_name_en\}\}/g,c[5]).replace(/\{\{getvar::bad_child_name\}\}/g,c[0]).replace(/\{\{getvar::bad_child_ga\}\}/g,c[1])
+   .replace(/\{\{getvar::bad_child_home_name\}\}/g,c[3]).replace(/\{\{getvar::bad_child_home\}\}/g,c[2]).replace(/\{\{getvar::bad_child\}\}/g,S.child)}
+let sideMap=null;
+function opening(){
+  let t=fillVars(OPEN[`${S.lang}_${S.mode}_${S.role}`]||'');
+  let mapBlock='';
+  t=t.replace(/<ns-map date="([^"]*)" time="([^"]*)" loc="([^"]*)">([\s\S]*?)<\/ns-map>/g,(_,date,time,loc,body)=>{
+    const pins=[...body.matchAll(/<pin who="([^"]+)" at="([^"]+)" kind="(\w+)">([^<]*)<\/pin>/g)].map(x=>[x[1],x[2],x[3],x[4]]);
+    const m={date,time,loc,pins};sideMap=m;
+    if(S.map==='0')mapBlock=`<div style="margin:16px 0">${mapHTML(m)}</div>`;
+    return '\u0000MAP\u0000'});
+  const radios=[];
+  t=t.replace(/<ns-radio who="([^"]*)" signal="(\w+)">([\s\S]*?)<\/ns-radio>/g,(_,w,s,b)=>{radios.push(radioHTML(w,s,b));return `\u0000R${radios.length-1}\u0000`});
+  const html=t.split(/\n{2,}/).map(par=>{
+    par=par.trim();if(!par)return '';
+    const parts=par.split('\n').map(line=>{
+      if(/^\u0000R\d+\u0000$/.test(line.trim()))return line.trim();
+      if(line.trim()==='\u0000MAP\u0000')return '';
+      let h=esc(line).replace(/\{\{user\}\}/g,'<span class="u">{{user}}</span>');
+      if(/^[『'‘].*[』'’]$/.test(line.trim()))h=`<span class="note">${h}</span>`;
+      return h});
+    const blocks=[];let buf=[];
+    parts.forEach(p=>{if(/^\u0000R\d+\u0000$/.test(p)){if(buf.length){blocks.push('<p>'+buf.join('<br>')+'</p>');buf=[]}blocks.push(p)}else if(p)buf.push(p)});
+    if(buf.length)blocks.push('<p>'+buf.join('<br>')+'</p>');
+    return blocks.join('')}).join('').replace(/\u0000R(\d+)\u0000/g,(_,i)=>radios[+i]);
+  return `<div class="msg">${html}${mapBlock}</div>`;
+}
+function actions(){
+  if(S.stage!=='preview')return '';
+  return `<div class="sel m-${S.mode}"><div class="sel-foot">${tr('이 내용으로 시작할까요?','Start with this opening?')}</div><div class="sel-row">${btn('confirm',tr('이 퍼스트 메시지 확정','Confirm this opening'),'',true)}${btn('back',tr('← 돌아가기','← Back'),'',false)}</div></div>`;
+}
+function renderSel(){
+  sideMap=null;
+  let h='';
+  if(S.stage==='select')h=selector();
+  else h=opening()+actions()+(S.stage==='confirmed'?`<div class="done">${tr('확정됨 · 시작 설정이 잠겼습니다','Confirmed · setup is locked')}<button data-fn="reset">${tr('처음부터','Start over')}</button></div>`:'');
+  $('#selOut').innerHTML=h;
+  $$('#selOut [data-fn]').forEach(b=>b.onclick=()=>act(b.dataset.fn));
+  renderSide();
+}
+function act(fn){
+  const locked=S.stage==='confirmed';
+  if(fn==='reset'){Object.assign(S,{stage:'select',page:'1',picked:false});return renderAll()}
+  if(locked)return;
+  if(fn.startsWith('lang_'))S.lang=fn.slice(5);
+  else if(fn.startsWith('mode_'))setMode(fn.slice(5),true);
+  else if(fn.startsWith('role_')){S.role=fn.slice(5);S.picked=false}
+  else if(fn.startsWith('child_')){S.child=fn.slice(6);S.picked=true}
+  else if(fn==='next')S.page='2';
+  else if(fn==='prev')S.page='1';
+  else if(fn==='preview')S.stage='preview';
+  else if(fn==='back'){S.stage='select';S.page='2'}
+  else if(fn==='confirm')S.stage='confirmed';
+  renderAll();
+  if(fn==='preview'||fn==='back'||fn==='next'||fn==='prev')$('#try .chat').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ── toggles (bot custom toggles) ── */
+function renderTg(){
+  const seg=(key,opts,dis)=>`<div class="seg${dis?' dis':''}">`+opts.map(([v,l])=>`<button data-k="${key}" data-v="${v}" class="${S[key]===v?'on':''}">${l}</button>`).join('')+'</div>';
+  $('#tg').innerHTML=`<h4>${tr('커스텀 토글','CUSTOM TOGGLES')}</h4>
+   <div class="k">${tr('지도','Map')}</div>${seg('map',[['0',tr('채팅 하단','Bottom')],['1',tr('사이드','Side')],['2',tr('끄기','Off')]])}
+   <div class="k">${tr('사이드 버튼 위치','Side button')}</div>${seg('side',[['0',tr('상단','Top')],['1',tr('중단','Middle')],['2',tr('하단','Bottom')]],S.map!=='1')}
+   <div class="k">${tr('무전','Radio')}</div>${seg('radio',[['0',tr('카드','Card')],['1',tr('텍스트','Text')]])}
+   <p>${tr('지도 끄기는 표시만 숨깁니다. 사이드 지도는 오프닝을 미리 보거나 확정한 뒤 화면 오른쪽에 나타납니다.','Turning the map off only hides it. The side map appears on the right edge after you preview or confirm an opening.')}</p>`;
+  $$('#tg [data-k]').forEach(b=>b.onclick=()=>{S[b.dataset.k]=b.dataset.v;renderAll()});
+}
+function renderSide(){
+  const el=$('#side');
+  if(S.map!=='1'||S.stage==='select'||!sideMap){el.style.display='none';el.open=false;return}
+  const pos=S.side==='1'?'top:calc(50% - 55px)':S.side==='2'?'bottom:120px':'top:84px';
+  const accent=S.mode==='halloween'?'#e8742a':'#2f4a35';
+  const wasOpen=el.open;
+  el.style.display='block';
+  el.innerHTML=`<summary title="${tr('지도 열기 / 닫기','Open / close map')}" style="position:fixed;right:0;${pos};z-index:70;cursor:pointer;list-style:none;writing-mode:vertical-rl;padding:14px 8px;border-radius:6px 0 0 6px;background:${accent};color:#fff;font:12px/1.2 monospace;box-shadow:-2px 2px 8px #000">FIELD MAP</summary><div style="position:fixed;z-index:71;right:34px;top:84px;width:min(480px,calc(100vw - 46px));max-height:calc(100dvh - 190px);overflow:auto;box-shadow:0 5px 20px #000">${mapHTML(sideMap)}</div>`;
+  el.open=wasOpen;
+}
+
+/* ── big map sample ── */
+function renderBig(){
+  const hw=S.mode==='halloween';
+  const P=hw?[['C02','SCHOOL','reported',tr('기록실, 제보함 확인 중','Checking the tip box')],['RUMOR','THEATER','unconfirmed',tr('뒷줄 관객은 못 나간다','The trapped back row')],['C05','ARCADE','last',tr('오락실 앞에서 헤어짐','Split up at the arcade')],['RUMOR','EMPTY_HOUSES','unconfirmed',tr('헐린 집 초인종','Doorbell, no house')],['RUMOR','PUMP','resolved',tr('물소리였음','Just the water')]]
+           :[['RUMOR','EMPTY_HOUSES','unconfirmed',tr('헐린 집 초인종','Doorbell, no house')],['RUMOR','FINCH_HOME','unconfirmed',tr('밤마다 기계 웃음소리','Mechanical laughter')],['C04','LIBRARY','last',tr('도서관 마감까지','At the library till close')],['C01','GARAGE','reported',tr('형 차 빌리는 중','Borrowing his brother’s car')],['RUMOR','VIDEO','unconfirmed',tr('라벨 없는 테이프','An unmarked VHS')]];
+  $('#bigMap').innerHTML=mapHTML({date:hw?tr('1987-10-24 (토)','1987-10-24 (Sat)'):tr('1987-10-20 (화)','1987-10-20 (Tue)'),time:hw?tr('오후 4:50','4:50 PM'):tr('오후 3:40','3:40 PM'),loc:hw?'FAIRGROUND':'SCHOOL',pins:P});
+}
+/* ── radio sample ── */
+function renderRadio(){
+  const save=S.radio;S.radio='0';
+  const R=[['C01','clear',tr('스카우트, 다른 입구 있어?','Scout, is there another way in?'),tr('맑음 · 평소 교신','clear · ordinary contact')],
+           ['C05','static',tr('뒷문 있어. 그리고 엄청 화난 개도.','There’s a back gate. And a very angry dog.'),tr('잡음 · 벽, 거리, 배터리','static · walls, range, batteries')],
+           ['UNKNOWN','cut',tr('…거기 누구 있어? 지금 문 앞에…','…is someone there? Right at the door…'),tr('끊김 · 목소리의 주인은 아직 모름','cut · the voice is not yet identified')]];
+  $('#radioDemo').innerHTML=R.map(r=>`<div>${radioHTML(r[0],r[1],r[2])}<div class="cap">${r[3]}</div></div>`).join('');
+  S.radio=save;
+}
+function setMode(m,fromSel){
+  if(S.stage==='confirmed'&&!fromSel)return;
+  S.mode=m;document.body.className='m-'+m;
+  $$('#heroModes button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
+}
+function renderAll(){$$('#heroModes button').forEach(b=>b.classList.toggle('on',b.dataset.m===S.mode));renderSel();renderTg();renderBig();renderRadio()}
+$$('#heroModes button').forEach(b=>b.onclick=()=>{if(S.stage==='confirmed'){Object.assign(S,{stage:'select',page:'1'})}setMode(b.dataset.m);renderAll()});
+window.onLangChange=()=>{S.lang=LANG;renderAll()};
+setMode('everyday');
+document.addEventListener('DOMContentLoaded',()=>{S.lang=LANG;renderAll()});
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}}),{threshold:.08});
+$$('.rv').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
